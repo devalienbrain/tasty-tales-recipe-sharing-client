@@ -2,6 +2,12 @@ Server side code link: https://github.com/devalienbrain/tasty-tales-recipe-shari
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Technology Used
+# Frontend Client:
+Next.js- for a scalable, SEO-friendly frontend.
+Redux- for state management.
+Tailwind CSS- for responsive design and UI components.
+
 ## Getting Started
 
 First, run the development server:

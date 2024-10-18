@@ -38,10 +38,10 @@ const Navbar = () => {
               {/* Navbar menu content here */}
 
               <li>
-                <a>About</a>
+                <a href="/about">About</a>
               </li>
               <li>
-                <a>Contact</a>
+                <a href="/contact">Contact</a>
               </li>
               <li>
                 <a>Recipes</a>
@@ -69,10 +69,10 @@ const Navbar = () => {
           {/* Sidebar content here */}
 
           <li>
-            <a>About</a>
+            <a href="/about">About</a>
           </li>
           <li>
-            <a>Contact</a>
+            <a href="/contact">Contact</a>
           </li>
           <li>
             <a>Recipes</a>

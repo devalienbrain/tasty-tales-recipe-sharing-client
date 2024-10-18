@@ -35,7 +35,7 @@ const RegisterPage = () => {
         <h1 className="text-4xl font-extrabold text-cyan-600 mb-5">
           Register <span className="text-black"> Now</span>
         </h1>
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row-reverse justify-between items-center">
           {/* Left Side - Image */}
           <div className="md:w-1/2 hidden md:block">
             <Image

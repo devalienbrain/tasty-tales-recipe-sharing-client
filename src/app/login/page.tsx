@@ -2,6 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import img from "../../assets/loginImg.jpg";
 
 type FormValues = {
   email: string;
@@ -20,79 +22,107 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="my-10">
-      <h1 className="text-center text-4xl mb-5">
-        Login <span className="text-accent">Here</span>
-      </h1>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <Image
-            src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?t=st=1710130697~exp=1710134297~hmac=f1b21d9c1823a0657d339c256a1c4ad8301168480e35b35aeba5106568a21010&w=740"
-            width={500}
-            height={200}
-            alt="login page"
-            className="w-full h-[85%]"
-          />
-        </div>
+    <div className="flex justify-center items-center min-h-screen bg-white text-black rounded-2xl">
+      <div className="w-full">
+        <h1 className="text-center text-4xl font-extrabold text-cyan-600 mb-5 pt-16">
+          Login <span className="text-black">Now</span>
+        </h1>
+        <div className="flex flex-col md:flex-row justify-between items-center bg-white rounded-lg shadow-lg p-6">
+          {/* Left Side - Image */}
+          <div className="md:w-1/2 hidden md:block">
+            <Image
+              src={img}
+              width={500}
+              height={500}
+              alt="login page"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
 
-        <div className="card w-[70%] h-[80%] shadow-xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <div className="form-control mt-5">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                {...register("email")}
-                placeholder="Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
+          {/* Right Side - Form */}
+          <div className="md:w-1/2 w-full px-8 py-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              {/* Email */}
+              <div>
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineMail className="mr-2 text-xl" />
+                  <span className="font-semibold">Email</span>
+                </label>
+                <input
+                  type="email"
+                  {...register("email", { required: true })}
+                  placeholder="Enter your email"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Email is required.
+                  </p>
+                )}
+              </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                {...register("password")}
-                type="password"
-                placeholder="Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
+              {/* Password */}
+              <div>
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineLock className="mr-2 text-xl" />
+                  <span className="font-semibold">Password</span>
+                </label>
+                <input
+                  type="password"
+                  {...register("password", { required: true })}
+                  placeholder="Enter your password"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Password is required.
+                  </p>
+                )}
+              </div>
 
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-accent btn-outline">
-                Login
+              {/* Submit Button */}
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="btn bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg w-full"
+                >
+                  Login
+                </button>
+              </div>
+
+              {/* Register Link */}
+              <p className="text-center mt-4 text-gray-700">
+                Don't have an account?{" "}
+                <Link href="/register" className="text-cyan-500 font-semibold">
+                  Create an account
+                </Link>
+              </p>
+            </form>
+
+            {/* Social Sign In */}
+            <p className="text-center mt-6">Or Sign In Using</p>
+            <div className="flex justify-center gap-6 mt-2">
+              <button className="btn btn-circle">
+                <Image
+                  src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
+                  width={40}
+                  height={40}
+                  alt="google logo"
+                />
+              </button>
+              <button className="btn btn-circle">
+                <Image
+                  src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                  width={35}
+                  height={35}
+                  alt="github logo"
+                />
               </button>
             </div>
-            <p className="text-center">
-              Don&apos;t have an account?{" "}
-              <Link className="text-accent" href="/register">
-                Create an account
-              </Link>
-            </p>
-          </form>
-          <p className="text-center">Or Sign Up Using</p>
-          <div className="flex justify-center mb-10 mt-2">
-            <button className="btn btn-circle ">
-              <Image
-                src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
-                width={50}
-                height={50}
-                alt="google logo"
-              />
-            </button>
-            <button className="btn btn-circle">
-              <Image
-                src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-                width={35}
-                height={35}
-                alt="github logo"
-              />
-            </button>
           </div>
         </div>
       </div>

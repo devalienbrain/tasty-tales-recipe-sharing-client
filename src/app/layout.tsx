@@ -18,9 +18,9 @@ export default async function RootLayout({
     <html lang="en" data-theme="synthwave">
       <body className="max-w-7xl mx-auto">
         <Navbar />
-        <hr />
+        <hr className="border-t-0.5 border-gray-200/30 my-6" />
         <div className="min-h-screen py-3">{children}</div>
-        <hr />
+        <hr className="border-t-0.5 border-gray-200/30 my-6" />
         <Footer />
       </body>
     </html>

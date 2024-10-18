@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai"; // React icons
+import img from "../../assets/joinImg.jpg";
 
 export type UserData = {
   username: string;
@@ -28,73 +30,107 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="my-10">
-      <h1 className="text-center text-4xl mb-5">
-        Register <span className="text-accent">Now</span>
-      </h1>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <Image
-            src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?t=st=1710081713~exp=1710085313~hmac=f637c194f1f143e63a84950cbf978997453777c872adf4aebbbecdaa445601a1&w=740"
-            width={500}
-            height={200}
-            alt="login page"
-            className="w-full h-[85%]"
-          />
-        </div>
+    <div className="flex justify-center items-center min-h-screen bg-white rounded-2xl">
+      <div className="w-full text-center">
+        <h1 className="text-4xl font-extrabold text-cyan-600 mb-5">
+          Register <span className="text-black"> Now</span>
+        </h1>
+        <div className="flex flex-col md:flex-row justify-between items-center">
+          {/* Left Side - Image */}
+          <div className="md:w-1/2 hidden md:block">
+            <Image
+              src={img}
+              width={500}
+              height={500}
+              alt="Join us"
+            />
+          </div>
 
-        <div className="card w-[70%] h-[70%] shadow-xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body py-3">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Full Name</span>
-              </label>
-              <input
-                type="text"
-                {...register("username")}
-                placeholder="User Name"
-                className="input input-bordered"
-                required
-              />
-            </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                {...register("email")}
-                placeholder="Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
+          {/* Right Side - Form */}
+          <div className="md:w-1/2 w-full p-5">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className=" p-6 rounded-xl shadow-md"
+            >
+              {/* Full Name */}
+              <div className="mb-4">
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineUser className="mr-2 text-xl" />
+                  <span className="font-semibold">Full Name</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("username", { required: true })}
+                  placeholder="Enter your full name"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.username ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.username && (
+                  <p className="text-red-500 text-sm mt-1">Name is required.</p>
+                )}
+              </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-                className="input input-bordered"
-                required
-              />
-            </div>
+              {/* Email */}
+              <div className="mb-4">
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineMail className="mr-2 text-xl" />
+                  <span className="font-semibold">Email</span>
+                </label>
+                <input
+                  type="email"
+                  {...register("email", { required: true })}
+                  placeholder="Enter your email"
+                  className={`input input-bordered w-full px-3 py-2 rounded-2xl border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Email is required.
+                  </p>
+                )}
+              </div>
 
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-accent btn-outline">
-                Register
-              </button>
-            </div>
-            <p className="text-center">
-              Already have an account?{" "}
-              <Link className="text-accent" href="/login">
-                Login
-              </Link>
-            </p>
-          </form>
+              {/* Password */}
+              <div className="mb-4">
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineLock className="mr-2 text-xl" />
+                  <span className="font-semibold">Password</span>
+                </label>
+                <input
+                  type="password"
+                  {...register("password", { required: true })}
+                  placeholder="Enter your password"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.password ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Password is required.
+                  </p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="btn bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg w-full"
+                >
+                  Register
+                </button>
+              </div>
+              {/* Already have an account */}
+              <p className="text-center mt-4 text-gray-700">
+                Already have an account?{" "}
+                <Link href="/login" className="text-cyan-500 font-semibold">
+                  Login
+                </Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

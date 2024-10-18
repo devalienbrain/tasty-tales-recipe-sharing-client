@@ -50,10 +50,10 @@ const Navbar = () => {
                 <a>Profiles</a>
               </li>
               <li>
-                <a>Login</a>
+                <a href="/login">Login</a>
               </li>
               <li>
-                <a>Join with us</a>
+                <a href="/register">Join</a>
               </li>
             </ul>
           </div>
@@ -81,10 +81,10 @@ const Navbar = () => {
             <a>Profiles</a>
           </li>
           <li>
-            <a>Login</a>
+            <a href="/login">Login</a>
           </li>
           <li>
-            <a>Join</a>
+            <a href="/register">Join</a>
           </li>
         </ul>
       </div>

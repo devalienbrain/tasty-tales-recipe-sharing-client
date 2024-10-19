@@ -23,4 +23,4 @@ export interface Recipe {
     following: string[];
     isPremiumMember: boolean;
   }
-  
+                    

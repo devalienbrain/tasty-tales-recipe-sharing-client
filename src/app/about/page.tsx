@@ -5,7 +5,7 @@ const AboutUs: React.FC = () => {
   return (
     <section className="w-full py-10 text-base-content">
       <div className="container mx-auto space-y-8">
-        <h1 className="text-4xl font-extrabold text-center mb-6">
+        <h1 className="text-5xl font-black text-center mb-6">
           About <span className="text-cyan-400">TastyTales</span>
         </h1>
 

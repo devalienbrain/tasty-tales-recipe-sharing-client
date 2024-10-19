@@ -49,7 +49,7 @@ const FAQSection: React.FC = () => {
       </h2>
       <div className="flex flex-col gap-6">
         {faqs.map((faq, index) => (
-          <div key={index} className="border-b border-cyan-500 cursor-pointer">
+          <div key={index} className="border-b border-cyan-500/15 cursor-pointer">
             <div
               onClick={() => toggleFAQ(index)}
               className="flex justify-between items-center py-4"

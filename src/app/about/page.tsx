@@ -74,8 +74,8 @@ const AboutUs: React.FC = () => {
             </h2>
             <p className="text-lg">
               Join us today and start your journey towards mastering cooking.
-              TastyTales offers something for everyone. Whether you're new to
-              the kitchen or a pro chef, our interactive tools and social
+              TastyTales offers something for everyone. Whether you&apos;re new
+              to the kitchen or a pro chef, our interactive tools and social
               features make cooking a delightful shared experience.
             </p>
           </div>

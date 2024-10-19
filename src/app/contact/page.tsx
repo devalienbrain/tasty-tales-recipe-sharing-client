@@ -40,6 +40,50 @@ const ContactUs: React.FC = () => {
             {" "}
             <span className="text-cyan-500">Contact</span> Us
           </h1>
+          {/* Contact Information */}
+          <div className="my-12 flex flex-col md:flex-row justify-center items-center gap-20 shadow-md rounded-2xl bg-purple-500/5 p-8">
+            {/* Left Side: Icon and Title */}
+            <div className="flex flex-col items-end space-x-4 mb-6 md:mb-0">
+              {/* Office Icon */}
+              <div className="text-primary">
+                <i className="text-5xl">
+                  <HiOutlineOfficeBuilding />
+                </i>
+              </div>
+              {/* Office Title and Text */}
+              <div className="text-right">
+                <h2 className="text-3xl font-bold mb-2">Our Office</h2>
+                <p className="text-gray-600">
+                  Feel free to visit or reach us anytime!
+                </p>
+              </div>
+            </div>
+
+            {/* Right Side: Contact Information */}
+            <div className="flex flex-col space-y-4 text-lg text-gray-700">
+              {/* Location */}
+              <div className="flex items-center space-x-2">
+                <i className="text-2xl text-primary">
+                  <HiLocationMarker />
+                </i>
+                <p>123 Sports Lane, Gulshan, Dhaka, Bangladesh</p>
+              </div>
+              {/* Phone */}
+              <div className="flex items-center space-x-2">
+                <i className="text-2xl text-primary">
+                  <HiPhone />
+                </i>
+                <p>Phone: (+880) 1893-070812</p>
+              </div>
+              {/* Email */}
+              <div className="flex items-center space-x-2">
+                <i className="text-2xl text-primary">
+                  <HiOutlineMail />
+                </i>
+                <p>Email: contactFatihaSabbir@sportsfacility.com</p>
+              </div>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Team Member Card */}
@@ -61,8 +105,8 @@ const ContactUs: React.FC = () => {
                     CEO & Founder
                   </p>
                   <p className="text-gray-700 text-center mt-2">
-                    Suu has over 10 years of experience in recipes management and
-                    is passionate about making recipe management more
+                    Suu has over 10 years of experience in recipes management
+                    and is passionate about making recipe management more
                     accessible.
                   </p>
                 </div>
@@ -139,51 +183,6 @@ const ContactUs: React.FC = () => {
                   Send Message
                 </button>
               </form>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div className="mt-12 flex flex-col md:flex-row justify-between items-center bg-black/5 shadow-md rounded-2xl p-8">
-            {/* Left Side: Icon and Title */}
-            <div className="flex items-center space-x-4 mb-6 md:mb-0">
-              {/* Office Icon */}
-              <div className="text-primary">
-                <i className="text-5xl">
-                  <HiOutlineOfficeBuilding />
-                </i>
-              </div>
-              {/* Office Title and Text */}
-              <div>
-                <h2 className="text-3xl font-bold mb-2">Our Office</h2>
-                <p className="text-gray-600">
-                  Feel free to visit or reach us anytime!
-                </p>
-              </div>
-            </div>
-
-            {/* Right Side: Contact Information */}
-            <div className="flex flex-col space-y-4 text-lg text-gray-700">
-              {/* Location */}
-              <div className="flex items-center space-x-2">
-                <i className="text-2xl text-primary">
-                  <HiLocationMarker />
-                </i>
-                <p>123 Sports Lane, Gulshan, Dhaka, Bangladesh</p>
-              </div>
-              {/* Phone */}
-              <div className="flex items-center space-x-2">
-                <i className="text-2xl text-primary">
-                  <HiPhone />
-                </i>
-                <p>Phone: (+880) 1893-070812</p>
-              </div>
-              {/* Email */}
-              <div className="flex items-center space-x-2">
-                <i className="text-2xl text-primary">
-                  <HiOutlineMail />
-                </i>
-                <p>Email: contactFatihaSabbir@sportsfacility.com</p>
-              </div>
             </div>
           </div>
         </div>

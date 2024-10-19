@@ -96,7 +96,7 @@ const LoginPage = () => {
 
               {/* Register Link */}
               <p className="text-center mt-4 text-gray-700">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link href="/register" className="text-cyan-500 font-semibold">
                   Create an account
                 </Link>
@@ -106,7 +106,7 @@ const LoginPage = () => {
             {/* Social Sign In */}
             <p className="text-center mt-6">Or Sign In Using</p>
             <div className="flex justify-center gap-6 mt-2">
-              <button className="btn btn-circle">
+              <button className="btn btn-circle bg-white">
                 <Image
                   src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
                   width={40}
@@ -114,7 +114,7 @@ const LoginPage = () => {
                   alt="google logo"
                 />
               </button>
-              <button className="btn btn-circle">
+              <button className="btn btn-circle bg-white">
                 <Image
                   src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
                   width={35}

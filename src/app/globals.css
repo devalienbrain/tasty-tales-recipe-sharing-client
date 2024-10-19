@@ -2,8 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
-     font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
+
+.hr-animation {
+     position: relative;
+     height: 2px; /* Thickness of the line */
+     background: linear-gradient(to right, transparent, cyan, transparent);
+     border: none; /* Remove default border */
+     overflow: hidden; /* Hide overflow for smooth animation */
+   }
+ 
+   .hr-animation::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: -100%; /* Start position */
+     height: 100%; /* Match the height of the hr */
+     width: 100%; /* Match the width of the hr */
+     background: linear-gradient(to right, transparent, cyan, transparent);
+     animation: move-light 4s linear infinite; /* Animation settings */
+   }
+ 
+   @keyframes move-light {
+     0% {
+       left: -100%; /* Start off-screen to the left */
+     }
+     50% {
+       left: 100%; /* Move off-screen to the right */
+     }
+     100% {
+       left: -100%; /* Reset to start again */
+     }
+   }

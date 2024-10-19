@@ -44,15 +44,18 @@ const ContactUs: React.FC = () => {
           <div className="my-12 flex flex-col md:flex-row justify-center items-center gap-20 shadow-md rounded-2xl bg-purple-500/5 p-8">
             {/* Left Side: Icon and Title */}
             <div className="flex flex-col items-center md:items-end space-x-4 mb-6 md:mb-0">
+              {/* Office Title */}
+              <div className="text-center md:text-right">
+                <h2 className="text-3xl font-bold mb-2">Our Office</h2>
+              </div>
               {/* Office Icon */}
               <div className="text-primary">
                 <i className="text-5xl">
                   <HiOutlineOfficeBuilding />
                 </i>
               </div>
-              {/* Office Title and Text */}
+              {/* Text */}
               <div className="text-center md:text-right">
-                <h2 className="text-3xl font-bold mb-2">Our Office</h2>
                 <p className="text-gray-600">
                   Feel free to visit or reach us anytime!
                 </p>

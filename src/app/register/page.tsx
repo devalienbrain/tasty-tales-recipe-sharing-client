@@ -3,16 +3,36 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { AiOutlineUser, AiOutlineMail, AiOutlineLock } from "react-icons/ai"; // React icons
+import {
+  AiOutlineUser,
+  AiOutlineMail,
+  AiOutlineLock,
+  AiOutlinePhone,
+  AiOutlineFileImage,
+  AiOutlineHome,
+} from "react-icons/ai"; // React icons
 import img from "../../assets/joinImg.jpg";
+import { useState } from "react";
 
 export type UserData = {
-  username: string;
+  userName: string;
   email: string;
   password: string;
+  phone: string;
+  photoUrl: string;
+  address: string;
 };
 
 const RegisterPage = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [address, setAddress] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -21,8 +41,37 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: UserData) => {
     console.log(data);
-
+    setName(data.userName);
+    setEmail(data.email);
+    setPassword(data.password);
+    setPhone(data.phone);
+    setPhotoUrl(data.photoUrl);
+    setAddress(data.address);
     try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          photoUrl,
+          address,
+          email,
+          password,
+          role: "user", // Hardcoded as "user"
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+
+      const data = await response.json();
+      setSuccess("Registration successful!");
+      setError(""); // Clear any previous errors
+      console.log("Register response:", data);
     } catch (err: any) {
       console.error(err.message);
       throw new Error(err.message);
@@ -38,12 +87,7 @@ const RegisterPage = () => {
         <div className="flex flex-col md:flex-row-reverse justify-between items-center">
           {/* Left Side - Image */}
           <div className="md:w-1/2 hidden md:block">
-            <Image
-              src={img}
-              width={500}
-              height={500}
-              alt="Join us"
-            />
+            <Image src={img} width={500} height={500} alt="Join us" />
           </div>
 
           {/* Right Side - Form */}
@@ -60,14 +104,74 @@ const RegisterPage = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("username", { required: true })}
+                  {...register("userName", { required: true })}
                   placeholder="Enter your full name"
                   className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
-                    errors.username ? "border-red-500" : "border-gray-300"
+                    errors.userName ? "border-red-500" : "border-gray-300"
                   } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
                 />
-                {errors.username && (
+                {errors.userName && (
                   <p className="text-red-500 text-sm mt-1">Name is required.</p>
+                )}
+              </div>
+              {/* Phone Number */}
+              <div className="mb-4">
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlinePhone className="mr-2 text-xl" />
+                  <span className="font-semibold">Phone Number</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("phone", { required: true })}
+                  placeholder="Enter your phone number"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.phone ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Phone Number is required.
+                  </p>
+                )}
+              </div>
+              {/* Photo URL */}
+              <div className="mb-4">
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineFileImage className="mr-2 text-xl" />
+                  <span className="font-semibold">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoUrl", { required: true })}
+                  placeholder="Enter your photo url"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.photoUrl ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.photoUrl && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Photo URL is required.
+                  </p>
+                )}
+              </div>
+              {/* Address */}
+              <div className="mb-4">
+                <label className="flex items-center text-gray-700 mb-2">
+                  <AiOutlineHome className="mr-2 text-xl" />
+                  <span className="font-semibold">Address</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("address", { required: true })}
+                  placeholder="Enter your address"
+                  className={`input input-bordered w-full px-3 py-2 rounded-lg border ${
+                    errors.address ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-cyan-400`}
+                />
+                {errors.address && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Address is required.
+                  </p>
                 )}
               </div>
 

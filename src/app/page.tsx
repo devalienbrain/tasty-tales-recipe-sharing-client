@@ -7,8 +7,7 @@ const HomePage = () => {
   return (
     <div>
       <Banner />
-      <hr className="border-0 h-px bg-cyan-500 my-10 hr-animation" />
-
+      <hr className="border-0 h-px bg-cyan-500 my-5 hr-animation" />
       <HowItWorks />
       <FeaturedImages />
       <FAQSection />

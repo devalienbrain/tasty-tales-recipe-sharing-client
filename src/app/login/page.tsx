@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import img from "../../assets/loginImg.jpg";
+import { useState } from "react";
+import { useLoginUserMutation } from "@/redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 type FormValues = {
   email: string;
@@ -11,6 +14,12 @@ type FormValues = {
 };
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [loginUser, { isLoading }] = useLoginUserMutation();
   const {
     register,
     handleSubmit,
@@ -19,6 +28,23 @@ const LoginPage = () => {
 
   const onSubmit = async (data: FormValues) => {
     console.log(data);
+    setEmail(data.email);
+    setPassword(data.password);
+    try {
+      const response = await loginUser({ email, password }).unwrap();
+      if (response.success) {
+        const { token, data } = response; // Destructure the correct fields
+        console.log({ data, token });
+
+        // Store token in localStorage if necessary
+        localStorage.setItem("accessToken", token);
+        dispatch(setUser({ user: data, token })); // Pass user data and token to the Redux store
+
+        // navigate("/dashboard");
+      }
+    } catch (err) {
+      setError("Login failed. Please check your email and password.");
+    }
   };
 
   return (

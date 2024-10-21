@@ -50,8 +50,8 @@ const Navbar = () => {
           <Image
                           src= {logo}
                           alt="TastyTaleLogo"
-                          width={50}
-                          height={50}
+                          width={60}
+                          height={60}
                           className="rounded-full object-cover"
                         />
             <Link href="/">

@@ -72,8 +72,8 @@ const DashbordUserProfile: React.FC = () => {
   const user = useAppSelector((state) => state.user?.currentUser?.user);
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen py-8 text-white">
-      <div className="w-full max-w-md rounded-xl shadow-lg p-8 text-center transition duration-300 hover:shadow-2xl">
+    <div className="flex flex-col items-center justify-start min-h-screen text-white">
+      <div className="w-full max-w-2xl text-center transition duration-300 hover:shadow-2xl">
         {/* Profile Picture */}
         {user?.photoUrl ? (
           <Image
@@ -93,33 +93,34 @@ const DashbordUserProfile: React.FC = () => {
         <h1 className="text-3xl font-extrabold mb-2">
           Welcome, <span className="text-blue-600">{user?.name}!</span>
         </h1>
-
+        <hr className="hr-animation" />
         {/* User Info */}
-        <p className="text-gray-200 text-lg mb-6">
-          Role: <span className="font-bold capitalize ">{user?.role}</span>
+        <p className="text-lg mb-6 font-bold capitalize text-red-600">
+          {user?.role}
         </p>
-
+        <div className="text-left text-xl font-black pt-10">
+          Profile Details
+        </div>
+        <hr className="h-0.5 py-2" />
         {/* Displaying Additional User Data */}
-        <div className="space-y-4 text-left">
-          <p className="text-base">
-            <strong className="">User ID:</strong> {user?._id}
+        <div className="space-y-4 text-left text-base text-slate-300">
+          <p>
+            <strong className="font-bold">Name:</strong> {user?.name}
           </p>
-          <p className=" text-base">
-            <strong className="">Email:</strong> {user?.email}
+          <p>
+            <strong className="font-bold">Role:</strong> {user?.role}
           </p>
-          <p className=" text-base">
-            <strong className="">Phone:</strong> {user?.phone}
+          <p>
+            <strong className="font-bold">Email:</strong> {user?.email}
           </p>
-          <p className=" text-base">
-            <strong className="">Address:</strong> {user?.address}
+          <p>
+            <strong className="font-bold">Phone:</strong> {user?.phone}
           </p>
-          <p className=" text-base">
-            <strong className="">Account Created At:</strong>{" "}
-            {new Date(user?.createdAt).toLocaleDateString()}
+          <p>
+            <strong className="font-bold">Address:</strong> {user?.address}
           </p>
-          <p className=" text-base">
-            <strong className="">Last Updated At:</strong>{" "}
-            {new Date(user?.updatedAt).toLocaleDateString()}
+          <p>
+            <strong className="font-bold">User ID:</strong> {user?._id}
           </p>
         </div>
 

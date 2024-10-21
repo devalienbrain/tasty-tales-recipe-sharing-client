@@ -1,68 +1,53 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { apiSlice } from '../api/apiSlice';
-import { User } from '../types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { apiSlice } from "../api/apiSlice";
+import { TUser } from "../types";
 
 interface UserState {
-  currentUser: User | null;
-  isAuthenticated: boolean;
+  currentUser: TUser | null;
 }
 
 const initialState: UserState = {
   currentUser: null,
-  isAuthenticated: false,
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
-    loginUser: (state, action: PayloadAction<User>) => {
+    setUser: (state, action: PayloadAction<TUser>) => {
       state.currentUser = action.payload;
-      state.isAuthenticated = true;
     },
-    logoutUser: (state) => {
-      state.currentUser = null;
-      state.isAuthenticated = false;
-    },
-    updateUser: (state, action: PayloadAction<User>) => {
+    updateUser: (state, action: PayloadAction<TUser>) => {
       if (state.currentUser?._id === action.payload._id) {
         state.currentUser = action.payload;
       }
     },
+    clearUser: (state) => {
+      state.currentUser = null;
+    },
   },
 });
 
-export const { loginUser, logoutUser, updateUser } = userSlice.actions;
+export const { setUser, updateUser, clearUser } = userSlice.actions;
 export default userSlice.reducer;
 
-// API Queries for users
+// API Queries for User Profile Management
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    registerUser: builder.mutation<User, Partial<User>>({
-      query: (newUser) => ({
-        url: '/users/register',
-        method: 'POST',
-        body: newUser,
-      }),
-      invalidatesTags: ['User'],
-    }),
-    loginUser: builder.mutation<User, Partial<User>>({
-      query: (credentials) => ({
-        url: '/auth/login',
-        method: 'POST',
-        body: credentials,
-      }),
-      invalidatesTags: ['User'],
-    }),
-    fetchUserProfile: builder.query<User, string>({
+    fetchUserProfile: builder.query<TUser, string>({
       query: (id) => `/users/${id}`,
-      providesTags: (result, error, id) => [{ type: 'User', id }],
+      providesTags: (result, error, id) => [{ type: "User", id }],
+    }),
+    updateUserProfile: builder.mutation<TUser, Partial<TUser>>({
+      query: (updatedUser) => ({
+        url: `/users/${updatedUser._id}`,
+        method: "PUT",
+        body: updatedUser,
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const {
-  useRegisterUserMutation,
-  useLoginUserMutation,
-  useFetchUserProfileQuery,
-} = usersApiSlice;
+export const { useFetchUserProfileQuery, useUpdateUserProfileMutation } =
+  usersApiSlice;

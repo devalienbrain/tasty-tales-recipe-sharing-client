@@ -5,8 +5,10 @@ import { useForm } from "react-hook-form";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import img from "../../assets/loginImg.jpg";
 import { useState } from "react";
-import { useLoginUserMutation } from "@/redux/slices/userSlice";
+// import { useLoginUserMutation } from "@/redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import {  useLoginUserMutation } from "@/redux/slices/authSlice";
+import { setUser } from "@/redux/slices/userSlice";
 
 type FormValues = {
   email: string;

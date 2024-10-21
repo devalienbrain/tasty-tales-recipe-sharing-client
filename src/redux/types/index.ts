@@ -11,7 +11,7 @@ export interface Recipe {
     author: string;
   }
   
-  export interface User {
+  export interface TUser {
     _id: string;
     name: string;
     email: string;

@@ -17,8 +17,11 @@ import { logout } from "@/redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/navigation";
 
+
 const Sidebar: React.FC = () => {
-  const user = useAppSelector((state: RootState) => state.user.user);
+  const user = useAppSelector(
+    (state: RootState) => state.user?.currentUser?.user
+  );
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -44,37 +47,20 @@ const Sidebar: React.FC = () => {
             </span>
           </Link>
         </li>
-
+        <hr className="hr-animation" />
         {/* Admin Links */}
         {user?.role === "admin" ? (
           <>
             <li>
               <Link
-                href="/dashboard/bookings"
+                href="/dashboard/recipes"
                 className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
               >
                 <FaShoppingCart className="text-xl" />
-                <span className="hidden md:inline">All Bookings</span>
+                <span className="hidden md:inline">All Recipes</span>
               </Link>
             </li>
-            <li>
-              <Link
-                href="/dashboard/facilities"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaList className="text-xl" />
-                <span className="hidden md:inline">All Facilities</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/dashboard/addFacility"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaAd className="text-xl" />
-                <span className="hidden md:inline">Add a Facility</span>
-              </Link>
-            </li>
+
             <li>
               <Link
                 href="/dashboard/users"
@@ -84,34 +70,7 @@ const Sidebar: React.FC = () => {
                 <span className="hidden md:inline">All Users</span>
               </Link>
             </li>
-            <li>
-              <Link
-                href="/dashboard/register"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaUsers className="text-xl" />
-                <span className="hidden md:inline">Create An Admin</span>
-              </Link>
-            </li>
-            <hr />
-            <li>
-              <Link
-                href="/dashboard/checkoutForPayment"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaPaypal className="text-xl" />
-                <span className="hidden md:inline">Payment</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/dashboard/userBookings"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaShoppingCart className="text-xl" />
-                <span className="hidden md:inline">My Bookings</span>
-              </Link>
-            </li>
+
             <hr />
           </>
         ) : (
@@ -128,15 +87,6 @@ const Sidebar: React.FC = () => {
             </li>
             <li>
               <Link
-                href="/dashboard/userBookings"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaShoppingCart className="text-xl" />
-                <span className="hidden md:inline">My Bookings</span>
-              </Link>
-            </li>
-            <li>
-              <Link
                 href="/facilities-list"
                 className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
               >
@@ -147,7 +97,26 @@ const Sidebar: React.FC = () => {
           </>
         )}
 
+        <li>
+          <Link
+            href="/dashboard/userBookings"
+            className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+          >
+            <FaShoppingCart className="text-xl" />
+            <span className="hidden md:inline">My Recipes</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/dashboard/addFacility"
+            className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+          >
+            <FaAd className="text-xl" />
+            <span className="hidden md:inline">Add a Recipe</span>
+          </Link>
+        </li>
         {/* Logout */}
+        <hr className="hr-animation" />
         <li>
           <div
             onClick={handleLogout}

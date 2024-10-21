@@ -5,6 +5,8 @@ import { TUser } from "@/redux/types";
 import Image from "next/image";
 import React from "react";
 import { FaEdit } from "react-icons/fa"; // Import React Icon for edit
+import { GiShadowFollower } from "react-icons/gi";
+import { RiUserFollowLine } from "react-icons/ri";
 
 const DashbordUserProfile: React.FC = () => {
   const user = useAppSelector(
@@ -31,13 +33,26 @@ const DashbordUserProfile: React.FC = () => {
 
         {/* Welcome Message */}
         <h1 className="text-3xl font-extrabold mb-2">
-          Welcome, <span className="text-blue-600 font-black">{user?.name}</span> !
+          Welcome,{" "}
+          <span className="text-blue-600 font-black">{user?.name}</span> !
         </h1>
         <hr className="hr-animation" />
         {/* User Info */}
         <p className="text-lg mb-6 font-bold uppercase text-red-600">
           {user?.role}
         </p>
+        <div className="flex flex-col gap-3 text-lime-400">
+          <div className="flex items-center gap-3">
+            {" "}
+            <GiShadowFollower className="text-cyan-400" />{" "}
+            <span className="font-black text-red-600">7</span> followers{" "}
+          </div>
+          <div className="flex items-center gap-3">
+            {" "}
+            <RiUserFollowLine className="text-cyan-400" />{" "}
+            <span className="font-black text-red-600">11 </span> following
+          </div>
+        </div>
         <div className="text-left text-xl font-black pt-10">
           Profile Details
         </div>

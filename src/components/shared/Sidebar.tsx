@@ -29,7 +29,7 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="bg-cyan-500 text-slate-950 p-4 md:p-6 shadow-xl rounded-2xl">
+    <div className="bg-cyan-500 text-slate-950 p-4 md:p-6 shadow-xl rounded-2xl md:min-h-screen">
       {/* Sidebar Menu */}
       <ul className="flex flex-row flex-wrap justify-around md:flex-col md:gap-4">
         {/* Home link */}

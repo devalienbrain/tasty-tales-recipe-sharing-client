@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLoginUserMutation } from "@/redux/slices/authSlice";
 import { setUser } from "@/redux/slices/userSlice";
-import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/navigation";
 
 type FormValues = {
@@ -20,7 +19,6 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  // const navigate = useNavigate();
   const router = useRouter();
   const dispatch = useDispatch();
   const [loginUser, { isLoading }] = useLoginUserMutation();

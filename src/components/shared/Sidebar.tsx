@@ -1,65 +1,161 @@
-import Link from "next/link";
+"use client";
 
-const Sidebar = () => {
+import React from "react";
+import Link from "next/link";
+import {
+  FaAd,
+  FaHome,
+  FaList,
+  FaPaypal,
+  FaShoppingCart,
+  FaUser,
+  FaUsers,
+} from "react-icons/fa";
+import { MdLogout } from "react-icons/md";
+import { RootState } from "@/redux/store";
+import { logout } from "@/redux/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useRouter } from "next/navigation";
+
+const Sidebar: React.FC = () => {
+  const user = useAppSelector((state: RootState) => state.user.user);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem("accessToken"); // Clear token on logout
+    router.push("/");
+  };
+
   return (
-    <div>
-      <ul className="menu bg-base-200 min-h-screen rounded-box">
+    <div className="bg-cyan-500 text-slate-950 p-4 md:p-6 shadow-xl rounded-2xl">
+      {/* Sidebar Menu */}
+      <ul className="flex flex-row flex-wrap justify-around md:flex-col md:gap-4">
+        {/* Home link */}
         <li>
-          <Link href="/dashboard">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-              />
-            </svg>
-            Dashboard
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+          >
+            <FaHome className="text-xl" />
+            <span className="hidden md:inline">
+              {user?.role === "admin" ? "Admin" : "User"} Home
+            </span>
           </Link>
         </li>
+
+        {/* Admin Links */}
+        {user?.role === "admin" ? (
+          <>
+            <li>
+              <Link
+                href="/dashboard/bookings"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaShoppingCart className="text-xl" />
+                <span className="hidden md:inline">All Bookings</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/facilities"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaList className="text-xl" />
+                <span className="hidden md:inline">All Facilities</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/addFacility"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaAd className="text-xl" />
+                <span className="hidden md:inline">Add a Facility</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/users"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaUser className="text-xl" />
+                <span className="hidden md:inline">All Users</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/register"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaUsers className="text-xl" />
+                <span className="hidden md:inline">Create An Admin</span>
+              </Link>
+            </li>
+            <hr />
+            <li>
+              <Link
+                href="/dashboard/checkoutForPayment"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaPaypal className="text-xl" />
+                <span className="hidden md:inline">Payment</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/userBookings"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaShoppingCart className="text-xl" />
+                <span className="hidden md:inline">My Bookings</span>
+              </Link>
+            </li>
+            <hr />
+          </>
+        ) : (
+          <>
+            {/* User Links */}
+            <li>
+              <Link
+                href="/dashboard/checkoutForPayment"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaPaypal className="text-xl" />
+                <span className="hidden md:inline">Payment</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/dashboard/userBookings"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaShoppingCart className="text-xl" />
+                <span className="hidden md:inline">My Bookings</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/facilities-list"
+                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
+              >
+                <FaShoppingCart className="text-xl" />
+                <span className="hidden md:inline">Book A Facility</span>
+              </Link>
+            </li>
+          </>
+        )}
+
+        {/* Logout */}
         <li>
-          <Link href="/dashboard/user-info">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            User Info
-          </Link>
-        </li>
-        <li>
-          <Link href="/dashboard/settings">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
-            Settings
-          </Link>
+          <div
+            onClick={handleLogout}
+            className="flex items-center gap-2 hover:text-red-600 cursor-pointer hover:bg-red-200 p-2 rounded-md transition-all duration-300"
+          >
+            <MdLogout className="text-xl" />
+            <span className="hidden md:inline">Logout</span>
+          </div>
         </li>
       </ul>
     </div>

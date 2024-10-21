@@ -24,7 +24,7 @@ export default function RootLayout({
           {" "}
           {/* Wrap the layout with ReduxProvider */}
           <Navbar />
-          <hr className="border-t-0.5 border-gray-200/30 my-6" />
+          <hr className="border-t-0.5 border-gray-200/30 mb-6" />
           <div className="min-h-screen p-3 md:px-0">{children}</div>
           <hr className="border-t-0.5 border-gray-200/30 my-6" />
           <Footer />

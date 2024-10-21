@@ -5,10 +5,11 @@ import { useForm } from "react-hook-form";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import img from "../../assets/loginImg.jpg";
 import { useState } from "react";
-// import { useLoginUserMutation } from "@/redux/slices/userSlice";
 import { useDispatch } from "react-redux";
-import {  useLoginUserMutation } from "@/redux/slices/authSlice";
+import { useLoginUserMutation } from "@/redux/slices/authSlice";
 import { setUser } from "@/redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 type FormValues = {
   email: string;
@@ -20,6 +21,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   // const navigate = useNavigate();
+  const router = useRouter();
   const dispatch = useDispatch();
   const [loginUser, { isLoading }] = useLoginUserMutation();
   const {
@@ -42,7 +44,8 @@ const LoginPage = () => {
         localStorage.setItem("accessToken", token);
         dispatch(setUser({ user: data, token })); // Pass user data and token to the Redux store
 
-        // navigate("/dashboard");
+        // navigate('/dashboard');
+        router.push("/dashboard");
       }
     } catch (err) {
       setError("Login failed. Please check your email and password.");

@@ -15,12 +15,16 @@ export interface Recipe {
     _id: string;
     name: string;
     email: string;
+    phone: string;
+    address: string;
     password?: string;
-    profilePicture?: string;
+    photoUrl?: string;
+    role?: string;
     bio?: string;
     recipes: Recipe[];
     followers: string[];
     following: string[];
     isPremiumMember: boolean;
+    user? : TUser
   }
                     

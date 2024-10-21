@@ -50,8 +50,8 @@ const Navbar = () => {
           <Image
                           src= {logo}
                           alt="TastyTaleLogo"
-                          width={60}
-                          height={60}
+                          width={40}
+                          height={40}
                           className="rounded-full object-cover"
                         />
             <Link href="/">
@@ -107,7 +107,7 @@ const Navbar = () => {
                       aria-label="Logout"
                       onClick={handleLogout}
                     >
-                       <MdLogout className="text-xl" />
+                       <MdLogout className="text-2xl font-black" />
                     </button>
                   </li>
                 </>

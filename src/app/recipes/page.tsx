@@ -2,7 +2,8 @@
 import { useGetRecipesQuery } from "@/redux/slices/recipeSlice";
 import { Recipe } from "@/redux/types";
 import { useState, useEffect } from "react";
-import Image from "next/image"; // Import next/image
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const RecipeList = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -10,6 +11,7 @@ const RecipeList = () => {
   const { data: recipes = [], isLoading, isError } = useGetRecipesQuery();
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const router = useRouter(); // Initialize useRouter
 
   useEffect(() => {
     // Filter recipes based on search term
@@ -43,8 +45,19 @@ const RecipeList = () => {
     }
   }, [page, recipes]);
 
-  if (isLoading) return <div>Loading recipes...</div>;
-  if (isError) return <div>Error loading recipes...</div>;
+  const handleRecipeClick = (recipeId: string) => {
+    console.log({ recipeId });
+    router.push(`/recipes/${recipeId}`); // Navigate to the recipe details page
+  };
+
+  if (isLoading)
+    return <div className="text-cyan-400 text-center">Loading recipes...</div>;
+  if (isError)
+    return (
+      <div className="text-red-500 font font-semibold text-center">
+        Error loading recipes!
+      </div>
+    );
 
   return (
     <div>
@@ -67,7 +80,8 @@ const RecipeList = () => {
         {filteredRecipes.slice(0, page * 5).map((recipe) => (
           <div
             key={recipe._id}
-            className="p-4 rounded-2xl shadow-md bg-black/10"
+            className="p-4 rounded-2xl shadow-md bg-black/10 cursor-pointer" // Add cursor pointer
+            onClick={() => handleRecipeClick(recipe._id)} // Add click handler
           >
             <Image
               src={recipe.image}
@@ -76,12 +90,15 @@ const RecipeList = () => {
               height={300}
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
-            <h2 className="text-xl font-bold mb-2">{recipe.title}</h2>
+            <h2 className="text-xl font-extrabold text-cyan-500 mb-2">
+              {recipe.title}
+            </h2>
             <p>{recipe.description}</p>
             <p className="text-sm text-gray-600">
               Cooking Time: {recipe.cookingTime} mins
             </p>
             <p className="text-sm text-gray-600">Upvotes: {recipe.upvotes}</p>
+            <p className="text-xs text-gray-700">Id: {recipe._id}</p>
           </div>
         ))}
       </div>

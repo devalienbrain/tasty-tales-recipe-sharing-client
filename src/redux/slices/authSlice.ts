@@ -1,19 +1,21 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { apiSlice } from '../api/apiSlice';
-import { TUser } from '../types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { apiSlice } from "../api/apiSlice";
+import { TUser } from "../types";
 
 type TAuthState = {
   token: string | null;
+  user: string | null;
   isAuthenticated: boolean;
 };
 
 const initialState: TAuthState = {
   token: null,
+  user: null,
   isAuthenticated: false,
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     setAuthToken: (state, action: PayloadAction<string>) => {
@@ -21,6 +23,7 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
     },
     logout: (state) => {
+      state.user = null;
       state.token = null;
       state.isAuthenticated = false;
     },
@@ -33,25 +36,31 @@ export default authSlice.reducer;
 // API Queries for Authentication
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    loginUser: builder.mutation<{ token: string }, { email: string; password: string }>({
+    loginUser: builder.mutation<
+      { token: string },
+      { email: string; password: string }
+    >({
       query: (credentials) => ({
-        url: '/auth/login',
-        method: 'POST',
+        url: "/auth/login",
+        method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ['Auth'],
+      invalidatesTags: ["Auth"],
     }),
-    registerUser: builder.mutation<{ token: string }, { name: string; email: string; password: string }>({
+    registerUser: builder.mutation<
+      { token: string },
+      { name: string; email: string; password: string }
+    >({
       query: (userDetails) => ({
-        url: '/auth/register',
-        method: 'POST',
+        url: "/auth/register",
+        method: "POST",
         body: userDetails,
       }),
-      invalidatesTags: ['Auth'],
+      invalidatesTags: ["Auth"],
     }),
     refreshToken: builder.query<{ token: string }, void>({
-      query: () => '/auth/refresh',
-      providesTags: ['Auth'],
+      query: () => "/auth/refresh",
+      providesTags: ["Auth"],
     }),
   }),
 });

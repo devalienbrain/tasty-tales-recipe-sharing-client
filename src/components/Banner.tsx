@@ -1,6 +1,6 @@
 const Banner: React.FC = () => {
     return (
-      <section className="w-full py-20 bg-gradient-to-r from-transparent to-white/20 dark:from-gray-900/25 dark:to-gray-600/25 rounded-2xl">
+      <section className="w-full py-20 bg-gradient-to-r from-white/5 to-white/20 dark:from-gray-900/25 dark:to-gray-600/25 rounded-2xl">
         <div className="flex flex-col items-center justify-center">
           {/* Text Section */}
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-gray-800 dark:text-gray-100 leading-tight text-center lg:text-left">

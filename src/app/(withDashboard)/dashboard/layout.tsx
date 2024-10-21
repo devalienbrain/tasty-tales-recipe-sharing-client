@@ -12,17 +12,15 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen">
-      <div className="flex flex-col md:flex-row">
-        {/* Sidebar on top for small devices, on the left for large devices */}
-        <div className="w-full md:w-[20%]">
-          <Sidebar />
-        </div>
+    <div className="min-h-screen flex flex-col md:flex-row">
+      {/* Sidebar */}
+      <div className="w-full md:w-[20%] md:h-screen bg-cyan-500 rounded-2xl md:rounded-r-none flex-shrink-0">
+        <Sidebar />
+      </div>
 
-        {/* Main content */}
-        <div className="w-full md:w-[80%] bg-base-200 rounded-box p-2">
-          {children}
-        </div>
+      {/* Main Content */}
+      <div className="w-full md:w-[80%] bg-base-200 p-4 md:p-6 flex-grow overflow-y-auto md:h-screen">
+        {children}
       </div>
     </div>
   );

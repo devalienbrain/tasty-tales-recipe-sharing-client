@@ -26,9 +26,9 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen  bg-gray-900 text-white flex flex-col lg:flex-row gap-8">
+    <div className="min-h-screen bg-slate-950 text-white flex flex-col-reverse lg:flex-row gap-8 rounded-2xl">
       {/* Recipes Section */}
-      <div className="w-full lg:w-4/5 p-5">
+      <div className="w-full lg:w-4/5 p-5 rounded-2xl">
         <h1 className="text-3xl font-black mb-6 text-center">
           <span className="text-cyan-400">My</span> Recipes
         </h1>
@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
       </div>
       {/* Profile Section */}
 
-      <div className="w-full lg:w-1/5 flex flex-col items-center lg:items-start bg-slate-500 rounded-lg lg:sticky top-0 pt-5 pl-3">
+      <div className="w-full lg:w-1/5 flex flex-col items-center lg:items-start bg-slate-900 lg:sticky top-0 lg:pt-5 pl-3 rounded-2xl">
         <h1 className="font-black text-2xl">
           My  <span className="text-cyan-400"> Profiles </span>
         </h1>
@@ -101,13 +101,6 @@ const Profile: React.FC = () => {
             <span className="font-bold text-red-600">11</span> following
           </div>
         </div>
-
-        {/* Additional Details */}
-        <div className="text-left text-slate-300 space-y-2 mb-4">
-          <p><strong className="font-bold">Phone:</strong> {user?.phone}</p>
-          <p><strong className="font-bold">Address:</strong> {user?.address}</p>
-        </div>
-
 
       </div>
 

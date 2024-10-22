@@ -17,7 +17,6 @@ import { logout } from "@/redux/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/navigation";
 
-
 const Sidebar: React.FC = () => {
   const user = useAppSelector(
     (state: RootState) => state.user?.currentUser?.user
@@ -108,7 +107,7 @@ const Sidebar: React.FC = () => {
         </li>
         <li>
           <Link
-            href="/dashboard/addFacility"
+            href="/dashboard/add-recipe"
             className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
           >
             <FaAd className="text-xl" />

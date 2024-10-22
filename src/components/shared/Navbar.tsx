@@ -47,13 +47,13 @@ const Navbar = () => {
             </label>
           </div>
           <div className="flex-1 flex justify-start items-center font-extrabold text-2xl">
-          <Image
-                          src= {logo}
-                          alt="TastyTaleLogo"
-                          width={40}
-                          height={40}
-                          className="rounded-full object-cover"
-                        />
+            <Image
+              src={logo}
+              alt="TastyTaleLogo"
+              width={40}
+              height={40}
+              className="rounded-full object-cover"
+            />
             <Link href="/">
               <span>
                 Tasty<span className="text-cyan-400">Tales</span>
@@ -76,6 +76,11 @@ const Navbar = () => {
               <li>
                 <Link href="/recipes" className="hover:text-cyan-400">
                   Recipes
+                </Link>
+              </li>
+              <li>
+                <Link href="/profile" className="hover:text-cyan-400">
+                  Profile
                 </Link>
               </li>
 
@@ -107,7 +112,7 @@ const Navbar = () => {
                       aria-label="Logout"
                       onClick={handleLogout}
                     >
-                       <MdLogout className="text-2xl font-black" />
+                      <MdLogout className="text-2xl font-black" />
                     </button>
                   </li>
                 </>

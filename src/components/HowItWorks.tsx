@@ -54,9 +54,10 @@ const HowItWorks = () => {
 
   return (
     <div className="container mx-auto my-10 py-10">
-      <h2 className="text-center text-5xl font-extrabold mb-8">
+      <h2 className="text-center text-5xl font-black mb-8">
         How It <span className="text-cyan-500">Works</span>
       </h2>
+      <hr className="hr-animation" />
       <div
         ref={sectionRef} // Apply the observer to this section
         className={`flex flex-col lg:flex-row justify-around items-stretch gap-8 transition-opacity duration-1000 ${

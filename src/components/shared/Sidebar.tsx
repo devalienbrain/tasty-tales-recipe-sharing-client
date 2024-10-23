@@ -98,7 +98,7 @@ const Sidebar: React.FC = () => {
 
         <li>
           <Link
-            href="/dashboard/userBookings"
+            href="/dashboard/my-recipes"
             className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
           >
             <FaShoppingCart className="text-xl" />

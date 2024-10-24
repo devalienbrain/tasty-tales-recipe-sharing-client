@@ -38,16 +38,31 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       query: (id) => `/users/${id}`,
       providesTags: (result, error, id) => [{ type: "User", id }],
     }),
-    updateUserProfile: builder.mutation<TUser, Partial<TUser>>({
-      query: (updatedUser) => ({
-        url: `/users/${updatedUser._id}`,
-        method: "PUT",
-        body: updatedUser,
+    getAllUsers: builder.query({
+      query: () => "/users",
+      providesTags: ["User"],
+    }),
+    blockUser: builder.mutation({
+      query: (id: string) => ({
+        url: `/users/${id}/block`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["User"],
+    }),
+    updateUserRole: builder.mutation({
+      query: ({ id, role }) => ({
+        url: `/users/${id}/role`,
+        method: "PATCH",
+        body: { role },
       }),
       invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useFetchUserProfileQuery, useUpdateUserProfileMutation } =
-  usersApiSlice;
+export const {
+  useFetchUserProfileQuery,
+  useGetAllUsersQuery,
+  useUpdateUserRoleMutation,
+  useBlockUserMutation,
+} = usersApiSlice;

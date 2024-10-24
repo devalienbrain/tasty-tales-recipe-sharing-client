@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
 
             <li>
               <Link
-                href="/dashboard/users"
+                href="/dashboard/all-users"
                 className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
               >
                 <FaUser className="text-xl" />

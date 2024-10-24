@@ -77,11 +77,13 @@ const Sidebar: React.FC = () => {
             {/* User Links */}
             <li>
               <Link
-                href="/dashboard/checkoutForPayment"
+                href="/dashboard/premium-payment"
                 className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
               >
                 <FaPaypal className="text-xl" />
-                <span className="hidden md:inline">Payment</span>
+                <span className="hidden md:inline bg-gradient-to-r bg-clip-text text-transparent font-semibold from-lime-300 via-lime-100 to-white">
+                  Premium Access
+                </span>
               </Link>
             </li>
           </>

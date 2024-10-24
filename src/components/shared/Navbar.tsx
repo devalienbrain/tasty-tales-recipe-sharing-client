@@ -352,14 +352,12 @@ const Navbar = () => {
                   <Image
                     src={currentUser.photoUrl} // User profile picture
                     alt={currentUser.name}
-                    width={70}
-                    height={70}
-                    className="rounded-full"
+                    width={40}
+                    height={40}
+                    className="p-1 object-cover rounded-full border border-cyan-300 flex items-center justify-center"
                   />
                 ) : (
-                  <div className="w-10 h-10 rounded-full border-2 border-blue-500 flex items-center justify-center text-gray-400">
-                    User
-                  </div>
+                  <div className="text-gray-400">User</div>
                 )}
               </li>
             </>
@@ -371,7 +369,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/register" className="hover:text-cyan-400">
+                <Link
+                  href="/register"
+                  className="hover:text-cyan-400 border border-cyan-300 px-5 py-2 rounded-3xl"
+                >
                   Join
                 </Link>
               </li>

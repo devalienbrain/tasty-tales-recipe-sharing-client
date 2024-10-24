@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import ReduxProvider from "@/components/shared/ReduxProvider"; // Import ReduxProvider
+import ScrollToTopButton from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "Tasty Tales Recipes",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <div className="min-h-screen p-3 md:px-0">{children}</div>
           <hr className="border-t-0.5 border-gray-200/30 my-6" />
           <Footer />
+          <ScrollToTopButton />
         </ReduxProvider>
       </body>
     </html>

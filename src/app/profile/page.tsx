@@ -3,13 +3,12 @@
 import { useAppSelector } from "@/redux/hook";
 import { TUser } from "@/redux/types";
 import { useGetRecipesQuery } from "@/redux/slices/recipeSlice";
-import { Recipe } from "@/redux/types";
-import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import { FaEdit } from "react-icons/fa";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { GiShadowFollower } from "react-icons/gi";
 import { RiUserFollowLine } from "react-icons/ri";
+import RecipeCard from "@/components/shared/RecipeCard";
+import Image from "next/image"; // Ensure correct import
 
 const Profile: React.FC = () => {
   const user = useAppSelector(
@@ -17,7 +16,9 @@ const Profile: React.FC = () => {
   ) as TUser;
 
   const { data: recipes = [] } = useGetRecipesQuery();
-  const userRecipes = recipes.filter((recipe: Recipe) => recipe.createdBy === user?._id);
+  const userRecipes = recipes.filter(
+    (recipe) => recipe.createdBy === user?._id
+  );
 
   const router = useRouter();
 
@@ -34,38 +35,25 @@ const Profile: React.FC = () => {
         </h1>
         <hr className="hr-animation my-5" />
         {userRecipes.length === 0 ? (
-          <div className="text-center text-red-400 text-sm">No recipes added yet.</div>
+          <div className="text-center text-red-400 text-sm">
+            No recipes added yet.
+          </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {userRecipes.map((recipe: Recipe) => (
-              <div
+            {userRecipes.map((recipe) => (
+              <RecipeCard
                 key={recipe._id}
-                className="p-4 rounded-2xl shadow-md bg-gray-800 cursor-pointer hover:shadow-lg transition duration-300"
-                onClick={() => handleRecipeClick(recipe._id)}
-              >
-                <Image
-                  src={recipe.image}
-                  alt={recipe.title}
-                  width={500}
-                  height={300}
-                  className="w-full h-48 object-cover rounded-lg mb-4"
-                />
-                <h2 className="text-xl font-extrabold text-cyan-500 mb-2">
-                  {recipe.title}
-                </h2>
-                <p>{recipe.description}</p>
-                <p className="text-sm text-gray-600">Cooking Time: {recipe.cookingTime} mins</p>
-                <p className="text-sm text-gray-600">Upvotes: {recipe.upvotes}</p>
-              </div>
+                recipe={recipe}
+                onClick={handleRecipeClick}
+              />
             ))}
           </div>
         )}
       </div>
       {/* Profile Section */}
-
       <div className="w-full lg:w-1/5 flex flex-col items-center lg:items-start bg-slate-900 lg:sticky top-0 lg:pt-5 pl-3 rounded-2xl">
         <h1 className="font-black text-2xl">
-          My  <span className="text-cyan-400"> Profiles </span>
+          My <span className="text-cyan-400">Profiles</span>
         </h1>
         <hr className="my-5" />
         {/* Profile Picture */}
@@ -101,10 +89,7 @@ const Profile: React.FC = () => {
             <span className="font-bold text-red-600">11</span> following
           </div>
         </div>
-
       </div>
-
-
     </div>
   );
 };

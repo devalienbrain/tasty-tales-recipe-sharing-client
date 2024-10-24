@@ -52,7 +52,9 @@ const AllUsers: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <h1 className="text-3xl font-black text-center mb-3">Manage Users</h1>
+      <h1 className="text-5xl font-black text-center mb-6">
+        <span className="text-cyan-400">Users</span> Management
+      </h1>
       <table className="min-w-full shadow-md rounded-lg overflow-hidden">
         <thead>
           <tr className="bg-gray-50 text-left text-sm font-semibold text-gray-700">

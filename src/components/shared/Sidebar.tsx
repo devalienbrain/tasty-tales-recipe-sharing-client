@@ -52,7 +52,7 @@ const Sidebar: React.FC = () => {
           <>
             <li>
               <Link
-                href="/dashboard/recipes"
+                href="/dashboard/all-recipes"
                 className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
               >
                 <FaShoppingCart className="text-xl" />
@@ -82,15 +82,6 @@ const Sidebar: React.FC = () => {
               >
                 <FaPaypal className="text-xl" />
                 <span className="hidden md:inline">Payment</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/facilities-list"
-                className="flex items-center gap-2 hover:bg-cyan-600 p-2 rounded-md transition-all duration-300"
-              >
-                <FaShoppingCart className="text-xl" />
-                <span className="hidden md:inline">Book A Facility</span>
               </Link>
             </li>
           </>

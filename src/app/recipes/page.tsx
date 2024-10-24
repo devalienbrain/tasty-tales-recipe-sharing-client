@@ -2,8 +2,9 @@
 import { useGetRecipesQuery } from "@/redux/slices/recipeSlice";
 import { Recipe } from "@/redux/types";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+
 import { useRouter } from "next/navigation";
+import RecipeCard from "@/components/shared/RecipeCard";
 
 const RecipeList = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -46,7 +47,6 @@ const RecipeList = () => {
   }, [page, recipes]);
 
   const handleRecipeClick = (recipeId: string) => {
-    console.log({ recipeId });
     router.push(`/recipes/${recipeId}`); // Navigate to the recipe details page
   };
 
@@ -78,28 +78,11 @@ const RecipeList = () => {
       {/* Recipe List */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredRecipes.slice(0, page * 5).map((recipe) => (
-          <div
+          <RecipeCard
             key={recipe._id}
-            className="p-4 rounded-2xl shadow-md bg-black/10 cursor-pointer" // Add cursor pointer
-            onClick={() => handleRecipeClick(recipe._id)} // Add click handler
-          >
-            <Image
-              src={recipe.image}
-              alt={recipe.title}
-              width={500}
-              height={300}
-              className="w-full h-48 object-cover rounded-lg mb-4"
-            />
-            <h2 className="text-xl font-extrabold text-cyan-500 mb-2">
-              {recipe.title}
-            </h2>
-            <p>{recipe.description}</p>
-            <p className="text-sm text-gray-600">
-              Cooking Time: {recipe.cookingTime} mins
-            </p>
-            <p className="text-sm text-gray-600">Upvotes: {recipe.upvotes}</p>
-            <p className="text-xs text-gray-700">Id: {recipe._id}</p>
-          </div>
+            recipe={recipe}
+            onClick={handleRecipeClick} // Pass the click handler to RecipeCard
+          />
         ))}
       </div>
 

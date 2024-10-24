@@ -18,6 +18,10 @@ const CheckoutForPayment = () => {
     address: "",
   });
 
+  // Error and loading state management
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   // Set the currentUser into the user state when it changes
   useEffect(() => {
     if (currentUser) {
@@ -40,23 +44,30 @@ const CheckoutForPayment = () => {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null); // Clear previous error
+    setIsLoading(true); // Set loading state
+
     const data = {
       user,
       totalPayableAmount: premiumFee,
       subscriptionType: "Premium",
     };
+
     try {
       const res = await createOrder(data).unwrap();
       console.log(res);
       if (res.success) {
         window.location.href = res?.data?.payment_url;
       } else {
-        console.error("Order creation failed:", res.message);
+        setError("Order creation failed: " + res.message);
       }
     } catch (error) {
-      console.log(error);
+      setError("An error occurred during payment.");
+    } finally {
+      setIsLoading(false); // Reset loading state
     }
   };
 
@@ -79,12 +90,16 @@ const CheckoutForPayment = () => {
           <h3 className="text-xl font-semibold mb-4">User Information</h3>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 text-left">
+              <label
+                className="block text-sm font-medium text-gray-700 text-left"
+                htmlFor="name"
+              >
                 Name
               </label>
               <input
                 type="text"
                 name="name"
+                aria-label="Name"
                 value={user.name}
                 onChange={handleChange}
                 required
@@ -92,12 +107,16 @@ const CheckoutForPayment = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 text-left">
+              <label
+                className="block text-sm font-medium text-gray-700 text-left"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
                 type="email"
                 name="email"
+                aria-label="Email"
                 value={user.email}
                 onChange={handleChange}
                 required
@@ -105,12 +124,16 @@ const CheckoutForPayment = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 text-left">
+              <label
+                className="block text-sm font-medium text-gray-700 text-left"
+                htmlFor="phone"
+              >
                 Phone
               </label>
               <input
                 type="text"
                 name="phone"
+                aria-label="Phone"
                 value={user.phone}
                 onChange={handleChange}
                 required
@@ -118,12 +141,16 @@ const CheckoutForPayment = () => {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 text-left">
+              <label
+                className="block text-sm font-medium text-gray-700 text-left"
+                htmlFor="address"
+              >
                 Address
               </label>
               <input
                 type="text"
                 name="address"
+                aria-label="Address"
                 value={user.address}
                 onChange={handleChange}
                 required
@@ -142,13 +169,20 @@ const CheckoutForPayment = () => {
             </p>
             <button
               type="submit"
-              className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-6 rounded-3xl transition duration-300 flex items-center gap-2"
+              disabled={isLoading}
+              className={`${
+                isLoading ? "bg-gray-400" : "bg-cyan-600 hover:bg-cyan-700"
+              } text-white font-semibold py-2 px-6 rounded-3xl transition duration-300 flex items-center gap-2`}
             >
-              <MdPayment className="text-white" /> Proceed to Payment
+              <MdPayment className="text-white" />
+              {isLoading ? "Processing..." : "Proceed to Payment"}
             </button>
           </div>
         </div>
       </form>
+
+      {/* Display error message if there is one */}
+      {error && <p className="text-red-500 mt-4">{error}</p>}
     </div>
   );
 };

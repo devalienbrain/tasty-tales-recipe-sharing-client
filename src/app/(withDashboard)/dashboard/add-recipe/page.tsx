@@ -59,7 +59,7 @@ const AddRecipe: React.FC = () => {
       instructions, // Include instructions in the data sent to backend
       cookingTime: parseInt(cookingTime), // Convert cookingTime to number
       imageUrl,
-      userId: currentUser?._id, // Use userId instead of user
+      createdBy: currentUser?._id, // Use userId instead of user
       ingredients: ingredients.map((ing) => ing.name), // Only send names of ingredients
     };
 

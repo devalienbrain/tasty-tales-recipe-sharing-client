@@ -12,6 +12,7 @@ const CheckoutForPayment = () => {
 
   // State for user input
   const [user, setUser] = useState({
+    userId: "",
     name: "",
     email: "",
     phone: "",
@@ -26,6 +27,7 @@ const CheckoutForPayment = () => {
   useEffect(() => {
     if (currentUser) {
       setUser({
+        userId: currentUser._id || "",
         name: currentUser.name || "",
         email: currentUser.email || "",
         phone: currentUser.phone || "",
@@ -53,7 +55,6 @@ const CheckoutForPayment = () => {
     const data = {
       user,
       totalPayableAmount: premiumFee,
-      subscriptionType: "Premium",
     };
 
     try {
@@ -73,7 +74,7 @@ const CheckoutForPayment = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-gray-100 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-extrabold mb-6 text-cyan-600">
+      <h2 className="text-3xl font-black mb-6 text-cyan-500">
         Premium User Subscription
       </h2>
       <p className="bg-white text-sm font-semibold text-gray-700 p-4 rounded-lg mb-8">
@@ -82,7 +83,7 @@ const CheckoutForPayment = () => {
         membership gives you unlimited access to the best recipes, cooking tips,
         and allows you to engage more with our community. The subscription fee
         is <strong>$500</strong> and is a one-time payment for lifetime access.
-        You can pay securely using Aamarpay or Stripe.
+        You can pay securely using Aamarpay.
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -163,16 +164,15 @@ const CheckoutForPayment = () => {
         {/* Display total payable amount */}
         <div className="mb-8 text-right bg-white p-4 rounded-lg">
           <div className="flex justify-between items-center gap-5">
-            <p className="text-lg font-bold text-gray-700 flex items-center gap-2">
-              <FaDollarSign className="text-cyan-600" /> Total Amount: $
-              {premiumFee}
+            <p className="text-lg font-bold text-red-600 flex items-center gap-2">
+              Total Amount: $ {premiumFee}
             </p>
             <button
               type="submit"
               disabled={isLoading}
               className={`${
-                isLoading ? "bg-gray-400" : "bg-cyan-600 hover:bg-cyan-700"
-              } text-white font-semibold py-2 px-6 rounded-3xl transition duration-300 flex items-center gap-2`}
+                isLoading ? "bg-gray-400" : "bg-cyan-500 hover:bg-cyan-400"
+              } text-white font-semibold py-2 px-6 rounded-3xl shadow-lg transition duration-300 flex items-center gap-2`}
             >
               <MdPayment className="text-white" />
               {isLoading ? "Processing..." : "Proceed to Payment"}

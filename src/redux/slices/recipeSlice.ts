@@ -48,14 +48,21 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ["Recipe"],
     }),
 
-    updateRecipe: builder.mutation<Recipe, Partial<Recipe>>({
-      query: (updatedRecipe) => ({
-        url: `/recipes/${updatedRecipe._id}`,
-        method: "PUT",
-        body: updatedRecipe,
-      }),
-      invalidatesTags: ["Recipe"],
+    updateRecipe: builder.mutation<
+      Recipe,
+      { id: string; updatedRecipe: Partial<Recipe> }
+    >({
+      query: ({ id, updatedRecipe }) => {
+        console.log("Updated recipe data:", updatedRecipe); // Log the updated data here
+        return {
+          url: `/recipes/${id}`, // The API endpoint for updating a recipe
+          method: "PUT", // Use the PATCH method to update the resource
+          body: updatedRecipe, // Send the updated recipe data in the request body
+        };
+      },
+      invalidatesTags: ["Recipe"], // Invalidate the cache for the "Recipe" tag to refetch updated data
     }),
+
     deleteRecipe: builder.mutation<void, string>({
       query: (id) => ({
         url: `/recipes/${id}`,

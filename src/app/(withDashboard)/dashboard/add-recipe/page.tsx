@@ -15,7 +15,7 @@ const AddRecipe: React.FC = () => {
   const [description, setDescription] = useState(""); // Added description state
   const [instructions, setInstructions] = useState(""); // Added instructions state
   const [cookingTime, setCookingTime] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [image, setImageUrl] = useState("");
   const [ingredients, setIngredients] = useState([{ name: "", quantity: "" }]);
   const [error, setError] = useState<string>("");
 
@@ -46,7 +46,7 @@ const AddRecipe: React.FC = () => {
       !description || // Check description
       !instructions || // Check instructions
       !cookingTime ||
-      !imageUrl ||
+      !image ||
       ingredients.some((ing) => !ing.name.trim() || !ing.quantity.trim())
     ) {
       setError("Please fill in all fields.");
@@ -58,7 +58,7 @@ const AddRecipe: React.FC = () => {
       description, // Include description in the data sent to backend
       instructions, // Include instructions in the data sent to backend
       cookingTime: parseInt(cookingTime), // Convert cookingTime to number
-      imageUrl,
+      image,
       createdBy: currentUser?._id, // Use userId instead of user
       ingredients: ingredients.map((ing) => ing.name), // Only send names of ingredients
     };
@@ -137,7 +137,7 @@ const AddRecipe: React.FC = () => {
           <input
             type="text"
             id="imageUrl"
-            value={imageUrl}
+            value={image}
             onChange={(e) => setImageUrl(e.target.value)}
             className="input input-bordered w-full"
             required

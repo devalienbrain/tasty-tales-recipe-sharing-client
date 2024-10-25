@@ -8,8 +8,6 @@ const HomePage = () => {
   return (
     <div>
       <Banner />
-      <hr className="border-0 h-px bg-cyan-500 my-3 hr-animation" />
-      <FeaturedImages />
       <HowItWorks />
       <FAQSection />
       <UserReviews />

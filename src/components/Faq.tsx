@@ -152,10 +152,10 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto lg:flex lg:space-x-6">
+    <div className="container mx-auto lg:flex gap-5">
       {/* Summary Section */}
       <div className="lg:w-1/2 bg-white p-6 border border-gray-300 rounded-2xl lg:h-auto lg:sticky lg:top-6">
-        <h2 className="text-2xl font-black mb-4 text-cyan-600">
+        <h2 className="text-2xl font-black mb-4 text-pink-600">
           Summary Details
         </h2>
         <hr className="hr-animation" />
@@ -173,7 +173,7 @@ const FAQ: React.FC = () => {
 
       {/* FAQ Section */}
       <div className="lg:w-1/2 bg-white p-6 border border-gray-300 rounded-2xl">
-        <h2 className="text-2xl font-black mb-4 text-cyan-600">
+        <h2 className="text-2xl font-black mb-4 text-pink-600">
           Frequently Asked Questions
         </h2>
         <hr className="hr-animation" />

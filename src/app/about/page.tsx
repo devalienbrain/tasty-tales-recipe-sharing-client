@@ -5,10 +5,10 @@ const AboutUs: React.FC = () => {
   return (
     <section className="w-full py-10 text-base-content">
       <div className="container mx-auto space-y-8">
-        <h1 className="text-5xl font-black text-center mb-6">
+        <h1 className="text-5xl font-black text-center text-pink-500 mb-6">
           About <span className="text-cyan-400">TastyTales</span>
         </h1>
-
+        <hr className="hr-animation" />
         {/* Mission Card */}
         <div className="card bg-gradient-to-r from-black/10 via-blue-50/10 to-black/10 rounded-2xl shadow-md p-6 flex items-center gap-5">
           <div className="w-24 h-24 flex justify-center items-center bg-primary/10 rounded-full">

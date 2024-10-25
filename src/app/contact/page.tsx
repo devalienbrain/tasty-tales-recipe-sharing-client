@@ -36,7 +36,7 @@ const ContactUs: React.FC = () => {
       <section className="w-full py-10 bg-base-100 text-base-content">
         <div>
           {/* Title */}
-          <h1 className="text-5xl font-black text-center mb-12">
+          <h1 className="text-5xl font-black text-center text-pink-500 mb-12">
             {" "}
             <span className="text-cyan-500">Contact</span> Us
           </h1>

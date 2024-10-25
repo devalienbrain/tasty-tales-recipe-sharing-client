@@ -54,7 +54,7 @@ const UserReviews = () => {
   return (
     <div className="py-10">
       <h1 className="text-4xl font-black mb-6 text-center">
-        User <span className="text-cyan-400">Reviews</span>
+        User <span className="text-pink-500">Reviews</span>
       </h1>
       <hr className="hr-animation" />
       <div

@@ -1,18 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { apiSlice } from '../api/apiSlice';
-import { Recipe } from '../types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { apiSlice } from "../api/apiSlice";
+import { Recipe } from "../types";
 
 const initialState: Recipe[] = [];
 
 export const recipeSlice = createSlice({
-  name: 'recipe',
+  name: "recipe",
   initialState,
   reducers: {
     addRecipe: (state, action: PayloadAction<Recipe>) => {
       state.push(action.payload);
     },
     updateRecipe: (state, action: PayloadAction<Recipe>) => {
-      const index = state.findIndex((recipe) => recipe._id === action.payload._id);
+      const index = state.findIndex(
+        (recipe) => recipe._id === action.payload._id
+      );
       if (index !== -1) {
         state[index] = action.payload;
       }
@@ -30,35 +32,36 @@ export default recipeSlice.reducer;
 export const recipesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getRecipes: builder.query<Recipe[], void>({
-      query: () => '/recipes',
-      providesTags: ['Recipe'],
+      query: () => "/recipes",
+      providesTags: ["Recipe"],
     }),
     getRecipeById: builder.query<Recipe, string>({
       query: (id) => `/recipes/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Recipe', id }],
+      providesTags: (result, error, id) => [{ type: "Recipe", id }],
     }),
     createRecipe: builder.mutation<Recipe, Partial<Recipe>>({
       query: (newRecipe) => ({
-        url: '/recipes',
-        method: 'POST',
+        url: "/recipes",
+        method: "POST",
         body: newRecipe,
       }),
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ["Recipe"],
     }),
+
     updateRecipe: builder.mutation<Recipe, Partial<Recipe>>({
       query: (updatedRecipe) => ({
         url: `/recipes/${updatedRecipe._id}`,
-        method: 'PUT',
+        method: "PUT",
         body: updatedRecipe,
       }),
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ["Recipe"],
     }),
     deleteRecipe: builder.mutation<void, string>({
       query: (id) => ({
         url: `/recipes/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: ['Recipe'],
+      invalidatesTags: ["Recipe"],
     }),
   }),
 });
@@ -70,4 +73,3 @@ export const {
   useUpdateRecipeMutation,
   useDeleteRecipeMutation,
 } = recipesApiSlice;
-

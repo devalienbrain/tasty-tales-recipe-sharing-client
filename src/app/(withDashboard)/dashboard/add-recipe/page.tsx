@@ -12,9 +12,10 @@ const AddRecipe: React.FC = () => {
   const router = useRouter();
 
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(""); // Added description state
+  const [instructions, setInstructions] = useState(""); // Added instructions state
   const [cookingTime, setCookingTime] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [ingredients, setIngredients] = useState([{ name: "", quantity: "" }]);
   const [error, setError] = useState<string>("");
 
@@ -37,35 +38,30 @@ const AddRecipe: React.FC = () => {
     setIngredients(newIngredients);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (
       !title ||
-      !description ||
+      !description || // Check description
+      !instructions || // Check instructions
       !cookingTime ||
-      !image ||
+      !imageUrl ||
       ingredients.some((ing) => !ing.name.trim() || !ing.quantity.trim())
     ) {
       setError("Please fill in all fields.");
       return;
     }
 
-    const recipeData = new FormData();
-    recipeData.append("title", title);
-    recipeData.append("description", description);
-    recipeData.append("cookingTime", cookingTime);
-    recipeData.append("image", image);
-    recipeData.append("user", currentUser?._id);
-    ingredients.forEach((ingredient) => {
-      recipeData.append("ingredients", JSON.stringify(ingredient));
-    });
+    const recipeData = {
+      title,
+      description, // Include description in the data sent to backend
+      instructions, // Include instructions in the data sent to backend
+      cookingTime: parseInt(cookingTime), // Convert cookingTime to number
+      imageUrl,
+      userId: currentUser?._id, // Use userId instead of user
+      ingredients: ingredients.map((ing) => ing.name), // Only send names of ingredients
+    };
 
     try {
       await createRecipe(recipeData).unwrap();
@@ -110,6 +106,18 @@ const AddRecipe: React.FC = () => {
           />
         </div>
         <div>
+          <label htmlFor="instructions" className="block font-semibold">
+            Instructions
+          </label>
+          <textarea
+            id="instructions"
+            value={instructions}
+            onChange={(e) => setInstructions(e.target.value)}
+            className="textarea textarea-bordered w-full"
+            required
+          />
+        </div>
+        <div>
           <label htmlFor="cookingTime" className="block font-semibold">
             Cooking Time (in minutes)
           </label>
@@ -123,14 +131,14 @@ const AddRecipe: React.FC = () => {
           />
         </div>
         <div>
-          <label htmlFor="image" className="block font-semibold">
-            Image Upload
+          <label htmlFor="imageUrl" className="block font-semibold">
+            Image URL
           </label>
           <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
+            type="text"
+            id="imageUrl"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
             className="input input-bordered w-full"
             required
           />

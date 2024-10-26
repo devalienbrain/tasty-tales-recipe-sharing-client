@@ -7,9 +7,15 @@ export interface Recipe {
   steps: string[];
   cookingTime: number;
   image: string;
-  ratings: number;
+  ratings: { userId: string; rating: number }[];
   comments: string[];
   author: string;
+  isPublished?: boolean;
+  createdBy?: string;
+  isDeleted?: boolean;
+  upvotes: number;
+  downvotes: number;
+  averageRatings: number;
 }
 
 export interface TUser {
@@ -27,4 +33,17 @@ export interface TUser {
   following: string[];
   isPremiumMember: boolean;
   user?: TUser;
+  curretUser?: TUser;
+  data: TUser;
+  isBlocked?: boolean;
+}
+export type TUsersResponse = {
+  data: TUser;
+};
+
+export interface Comment {
+  userId: string;
+  username: string;
+  content: string;
+  date: string;
 }

@@ -29,9 +29,14 @@ const AllRecipes = () => {
 
   const togglePublishStatus = async (recipe: Recipe) => {
     // Toggle the publish status of a recipe
-    const updatedRecipe = { ...recipe, isPublished: !recipe.isPublished }; // Assuming recipe has an isPublished field
+    const updatedRecipe = { ...recipe, isPublished: !recipe.isPublished }; // Create updated recipe object
+    const updatePayload = {
+      id: recipe._id, // Pass the recipe ID
+      updatedRecipe: updatedRecipe, // Pass the updated recipe object
+    };
+
     try {
-      await updateRecipe(updatedRecipe).unwrap(); // Call the update recipe mutation
+      await updateRecipe(updatePayload).unwrap(); // Call the update recipe mutation with the correct payload
     } catch (error) {
       console.error("Failed to update recipe: ", error);
     }

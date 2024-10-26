@@ -12,13 +12,13 @@ export const userSlice = createSlice({
     //   state.push(action.payload);
     // },
     updateUser: (state, action: PayloadAction<TUser>) => {
-      const index = state.findIndex(user => user._id === action.payload._id);
+      const index = state.findIndex((user) => user._id === action.payload._id);
       if (index !== -1) {
         state[index] = action.payload; // Update user in the array
       }
     },
     blockUser: (state, action: PayloadAction<string>) => {
-      const index = state.findIndex(user => user._id === action.payload);
+      const index = state.findIndex((user) => user._id === action.payload);
       if (index !== -1) {
         state[index].isBlocked = true; // Assuming you have an isBlocked property in TUser
       }
@@ -26,7 +26,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addUser, updateUser, blockUser } = userSlice.actions;
+export const { updateUser, blockUser } = userSlice.actions;
 export default userSlice.reducer;
 
 // API Queries for users

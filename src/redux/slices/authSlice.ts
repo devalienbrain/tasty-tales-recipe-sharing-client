@@ -5,10 +5,12 @@ import { apiSlice } from "../api/apiSlice";
 type TAuthState = {
   token: string | null;
   currentUser: TUser | null;
+  user: TUser | null;
 };
 
 const initialState: TAuthState = {
   currentUser: null,
+  user: null,
   token: null,
 };
 
@@ -16,7 +18,10 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCurrentUser: (state, action: PayloadAction<{ currentUser: TUser; token: string }>) => {
+    setCurrentUser: (
+      state,
+      action: PayloadAction<{ currentUser: TUser; token: string }>
+    ) => {
       console.log(action.payload);
       state.currentUser = action.payload.currentUser;
       state.token = action.payload.token;
@@ -44,7 +49,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ["auth"],
     }),
     registerUser: builder.mutation<
       { token: string },
@@ -55,11 +60,11 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: userDetails,
       }),
-      invalidatesTags: ["Auth"],
+      invalidatesTags: ["auth"],
     }),
     refreshToken: builder.query<{ token: string }, void>({
       query: () => "/auth/refresh",
-      providesTags: ["Auth"],
+      providesTags: ["auth"],
     }),
   }),
 });

@@ -14,6 +14,13 @@ type FormValues = {
   password: string;
 };
 
+interface LoginResponse {
+  success: boolean;
+  token: string;
+  data: any; 
+}
+
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +39,7 @@ const LoginPage = () => {
     setEmail(data?.email);
     setPassword(data?.password);
     try {
-      const response = await loginUser({ email, password }).unwrap();
+      const response = await loginUser({ email, password }).unwrap() as LoginResponse;;
       if (response.success) {
         const { token, data } = response; // Destructure the correct fields
         console.log(data);

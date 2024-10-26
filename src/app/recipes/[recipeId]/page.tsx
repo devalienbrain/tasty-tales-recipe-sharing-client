@@ -1,182 +1,111 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { useAppSelector } from "@/redux/hook";
-import {
-  useGetRecipeByIdQuery,
-  useUpdateRecipeMutation,
-} from "@/redux/slices/recipeSlice";
-import { FaStar } from "react-icons/fa";
-import { BiUpvote, BiDownvote } from "react-icons/bi";
-import { AiOutlineComment } from "react-icons/ai";
+// "use client"
+// import React, { useState, useEffect } from "react";
+// import { useParams, Navigate } from "react-router-dom";
+// import {
+//   useGetRecipeByIdQuery,
+//   useUpdateRecipeMutation,
+// } from "@/redux/slices/recipeSlice";
+// import { useAppSelector } from "@/redux/hook";
+// import { Comment, Recipe } from "@/redux/types";
 
-const RecipeDetailsPage = ({ params }: { params: { recipeId: string } }) => {
-  const { recipeId } = params;
-  const { data: recipe, isLoading, isError } = useGetRecipeByIdQuery(recipeId);
-  const [updateRecipe] = useUpdateRecipeMutation();
+// const RecipeDetailsPage = () => {
+//   const { recipeId } = useParams<{ recipeId: string | undefined }>();
+//   const {
+//     data: recipe,
+//     isLoading,
+//     isError,
+//   } = useGetRecipeByIdQuery(recipeId || ""); // Pass a default value if recipeId is undefined
+//   const [updateRecipe] = useUpdateRecipeMutation();
+//   const user = useAppSelector((state) => state.auth?.currentUser);
+//   const [comment, setComment] = useState<string>("");
 
-  const user = useAppSelector((state) => state.user?.currentUser?.user);
-  const [rating, setRating] = useState<number | null>(null);
-  const [comment, setComment] = useState<string>("");
-  const [comments, setComments] = useState(recipe?.comments || []);
+//   // Initialize comments state based on recipe comments if available
+//   const [comments, setComments] = useState<Comment[]>(() => {
+//     return (
+//       recipe?.comments.map((comment) => ({
+//         userId: comment.userId || "unknown_user",
+//         username: comment.username || "Anonymous",
+//         content: comment.content || "",
+//         date: comment.date || new Date().toLocaleString(),
+//       })) || []
+//     );
+//   });
 
-  const handleRating = async (newRating: number) => {
-    setRating(newRating);
-    const updatedRecipe = {
-      ...recipe,
-      ratings: [...recipe.ratings, { userId: user?._id, rating: newRating }],
-    };
-    await updateRecipe(updatedRecipe);
-  };
+//   useEffect(() => {
+//     // Update comments when recipe changes
+//     if (recipe) {
+//       setComments(
+//         recipe.comments.map((comment) => ({
+//           userId: comment.userId || "unknown_user",
+//           username: comment.username || "Anonymous",
+//           content: comment.content || "",
+//           date: comment.date || new Date().toLocaleString(),
+//         }))
+//       );
+//     }
+//   }, [recipe]);
 
-  const handleUpvote = async () => {
-    const updatedRecipe = { ...recipe, upvotes: recipe.upvotes + 1 };
-    await updateRecipe(updatedRecipe);
-  };
+//   if (isLoading) return <div>Loading...</div>;
+//   if (isError) return <div>Error loading recipe.</div>;
+//   if (!recipeId) return <Navigate to="/404" />; // Redirect if recipeId is undefined
 
-  const handleDownvote = async () => {
-    const updatedRecipe = { ...recipe, downvotes: recipe.downvotes + 1 };
-    await updateRecipe(updatedRecipe);
-  };
+//   const handleCommentSubmit = async () => {
+//     if (!recipe?._id) {
+//       console.error("Recipe ID is not available.");
+//       return;
+//     }
 
-  const handleCommentSubmit = async () => {
-    const newComment = {
-      userId: user?._id,
-      username: user?.name,
-      content: comment,
-      date: new Date().toLocaleString(),
-    };
-    const updatedRecipe = {
-      ...recipe,
-      comments: [...recipe.comments, newComment],
-    };
-    await updateRecipe(updatedRecipe);
-    setComments([...comments, newComment]);
-    setComment("");
-  };
+//     const newComment: Comment = {
+//       userId: user?._id || "unknown_user",
+//       username: user?.name || "Anonymous",
+//       content: comment,
+//       date: new Date().toLocaleString(),
+//     };
 
-  if (isLoading)
-    return (
-      <div className="text-cyan-400 text-center">Loading recipe details...</div>
-    );
-  if (isError || !recipe)
-    return (
-      <div className="text-red-500 font-semibold text-center">
-        Error loading recipe details!
-      </div>
-    );
+//     const updatedRecipe: Partial<Recipe> = {
+//       comments: [...(recipe.comments || []), newComment],
+//     };
 
-  return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-extrabold text-center text-cyan-500 mb-4">
-        {recipe.title}
-      </h1>
-      <hr className="hr-animation my-5" />
-      <div className="relative w-full h-64 mb-4">
-        <Image
-          src={recipe.image}
-          alt={recipe.title}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
-        />
-      </div>
-      <p className="text-lg text-gray-700 mb-4">{recipe.description}</p>
+//     await updateRecipe({ id: recipeId, recipe: updatedRecipe });
 
-      {/* Rating Section */}
-      <div className="mb-4">
-        <h2 className="text-2xl font-semibold text-cyan-500">
-          Rate this recipe
-        </h2>
-        <div className="flex space-x-2">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <FaStar
-              key={star}
-              size={24}
-              className={`cursor-pointer ${
-                rating >= star ? "text-yellow-400" : "text-gray-400"
-              }`}
-              onClick={() => handleRating(star)}
-            />
-          ))}
-        </div>
-        <p className="text-sm text-gray-500">
-          Average Rating: {recipe.averageRating || "N/A"}
-        </p>
-      </div>
+//     // Update the local comments state
+//     setComments((prevComments) => [...prevComments, newComment]);
+//     setComment("");
+//   };
 
-      {/* Ingredients */}
-      <h2 className="text-2xl font-semibold text-cyan-500 mb-2">Ingredients</h2>
-      <ul className="list-disc pl-5 mb-4">
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index} className="text-gray-600">
-            {ingredient}
-          </li>
-        ))}
-      </ul>
+//   return (
+//     <div className="recipe-details">
+//       <h1 className="text-2xl font-bold">{recipe.title}</h1>
+//       <p>{recipe.description}</p>
+//       {/* Display the recipe details here */}
 
-      {/* Instructions */}
-      <h2 className="text-2xl font-semibold text-cyan-500 mb-2">
-        Instructions
-      </h2>
-      <p className="text-gray-600 mb-4">{recipe.instructions}</p>
+//       <h2 className="text-xl font-semibold">Comments</h2>
+//       {comments.map((comment) => (
+//         <div key={comment.userId} className="comment">
+//           <p className="font-bold">{comment.username}</p>
+//           <p>{comment.content}</p>
+//           <p className="text-gray-500">{comment.date}</p>
+//         </div>
+//       ))}
 
-      {/* Upvote/Downvote System */}
-      <div className="flex justify-between items-center mt-4">
-        <div>
-          <span className="text-lime-400">
-            Upvotes: <span className="font-bold">{recipe.upvotes}</span>
-          </span>
-          <span className="text-red-500 ml-4">
-            Downvotes: <span className="font-bold">{recipe.downvotes}</span>
-          </span>
-        </div>
-        <div className="flex space-x-2">
-          <button
-            onClick={handleUpvote}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400 transition duration-200 flex items-center"
-          >
-            <BiUpvote size={20} /> Upvote
-          </button>
-          <button
-            onClick={handleDownvote}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-400 transition duration-200 flex items-center"
-          >
-            <BiDownvote size={20} /> Downvote
-          </button>
-        </div>
-      </div>
+//       <div className="comment-form">
+//         <textarea
+//           value={comment}
+//           onChange={(e) => setComment(e.target.value)}
+//           placeholder="Add a comment..."
+//           className="border p-2"
+//         />
+//         <button
+//           onClick={handleCommentSubmit}
+//           className="bg-blue-500 text-white p-2 mt-2"
+//         >
+//           Submit Comment
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
 
-      {/* Comment Section */}
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold text-cyan-500 mb-2">Comments</h2>
-        <div className="mb-4">
-          <textarea
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg"
-            placeholder="Add a comment"
-          />
-          <button
-            onClick={handleCommentSubmit}
-            className="mt-2 px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-400 transition duration-200"
-          >
-            Submit
-          </button>
-        </div>
-        <div className="space-y-4">
-          {comments.map((c, index) => (
-            <div key={index} className="bg-gray-100 p-4 rounded-lg shadow">
-              <p className="text-gray-800">
-                {c.username} ({c.date}):
-              </p>
-              <p className="text-gray-600">{c.content}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
+// export default RecipeDetailsPage;
+const RecipeDetailsPage = () => {};
 export default RecipeDetailsPage;

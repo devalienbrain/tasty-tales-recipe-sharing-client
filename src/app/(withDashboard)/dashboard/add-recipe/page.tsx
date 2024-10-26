@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 const AddRecipe: React.FC = () => {
-  const currentUser = useAppSelector((state) => state.user?.currentUser?.user);
+  const currentUser = useAppSelector((state) => state.auth?.currentUser);
   const [createRecipe] = useCreateRecipeMutation();
   const router = useRouter();
 
@@ -30,7 +30,7 @@ const AddRecipe: React.FC = () => {
 
   const handleIngredientChange = (
     index: number,
-    field: string,
+    field: "name" | "quantity", // Specify as a union type
     value: string
   ) => {
     const newIngredients = [...ingredients];

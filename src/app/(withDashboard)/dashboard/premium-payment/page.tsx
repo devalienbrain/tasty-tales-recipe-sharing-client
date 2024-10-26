@@ -8,7 +8,7 @@ import { useCreateOrderMutation } from "@/redux/api/apiSlice";
 
 const CheckoutForPayment = () => {
   const [createOrder] = useCreateOrderMutation();
-  const currentUser = useAppSelector((state) => state.user?.currentUser?.user);
+  const currentUser = useAppSelector((state) => state.auth?.currentUser);
 
   // State for user input
   const [user, setUser] = useState({

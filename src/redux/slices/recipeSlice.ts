@@ -56,7 +56,7 @@ export const recipesApiSlice = apiSlice.injectEndpoints({
         console.log("Updated recipe data:", updatedRecipe); // Log the updated data here
         return {
           url: `/recipes/${id}`, // The API endpoint for updating a recipe
-          method: "PUT", // Use the PATCH method to update the resource
+          method: "PATCH", // Use the PATCH method to update the resource
           body: updatedRecipe, // Send the updated recipe data in the request body
         };
       },

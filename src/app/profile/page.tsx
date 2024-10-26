@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const Profile: React.FC = () => {
   const user = useAppSelector(
-    (state) => state.user?.currentUser?.user
+    (state) => state.auth?.currentUser
   ) as TUser;
 
   const { data: recipes = [] } = useGetRecipesQuery();

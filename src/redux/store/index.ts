@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 import recipeReducer from "../slices/recipeSlice";
 import userReducer from "../slices/userSlice";
+import authReducer from "../slices/authSlice";
 
 import {
   persistReducer,
@@ -22,13 +23,14 @@ const userPersistConfig = {
   storage,
 };
 
-const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
+const persistedAuthReducer = persistReducer(userPersistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     recipe: recipeReducer,
-    user: persistedUserReducer, // Persisted user reducer
+    user: userReducer,
+    auth: persistedAuthReducer, // Persisted user reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

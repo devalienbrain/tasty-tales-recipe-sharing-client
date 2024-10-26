@@ -19,8 +19,8 @@ import { useRouter } from "next/navigation";
 
 const Sidebar: React.FC = () => {
   const user = useAppSelector(
-    (state: RootState) => state.user?.currentUser?.user
-  );
+    (state: RootState) => state.auth?.currentUser); // Get the currentUser from Redux
+ 
   const dispatch = useAppDispatch();
   const router = useRouter();
 

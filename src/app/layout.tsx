@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="synthwave">
       <head>
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
       </head>
       <body className="max-w-7xl mx-auto">
         <ReduxProvider>

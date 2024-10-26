@@ -6,8 +6,7 @@ import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import img from "../../assets/loginImg.jpg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLoginUserMutation } from "@/redux/slices/authSlice";
-import { setUser } from "@/redux/slices/userSlice";
+import { setCurrentUser, useLoginUserMutation } from "@/redux/slices/authSlice";
 import { useRouter } from "next/navigation";
 
 type FormValues = {
@@ -30,19 +29,15 @@ const LoginPage = () => {
 
   const onSubmit = async (data: FormValues) => {
     console.log(data);
-    setEmail(data.email);
-    setPassword(data.password);
+    setEmail(data?.email);
+    setPassword(data?.password);
     try {
       const response = await loginUser({ email, password }).unwrap();
       if (response.success) {
         const { token, data } = response; // Destructure the correct fields
-        console.log({ data, token });
-
-        // Store token in localStorage if necessary
+        console.log(data);
         localStorage.setItem("accessToken", token);
-        dispatch(setUser({ user: data, token })); // Pass user data and token to the Redux store
-
-        // navigate('/dashboard');
+        dispatch(setCurrentUser({ currentUser: data, token }));
         router.push("/dashboard");
       }
     } catch (err) {

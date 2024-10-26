@@ -18,10 +18,10 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
   user,
 }) => {
   const dispatch = useDispatch();
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [phone, setPhone] = useState(user.phone);
-  const [address, setAddress] = useState(user.address);
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [phone, setPhone] = useState(user?.phone);
+  const [address, setAddress] = useState(user?.address);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

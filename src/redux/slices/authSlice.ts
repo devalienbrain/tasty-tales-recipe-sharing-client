@@ -1,36 +1,35 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { apiSlice } from "../api/apiSlice";
 import { TUser } from "../types";
+import { apiSlice } from "../api/apiSlice";
 
 type TAuthState = {
   token: string | null;
-  user: string | null;
-  isAuthenticated: boolean;
+  currentUser: TUser | null;
 };
 
 const initialState: TAuthState = {
+  currentUser: null,
   token: null,
-  user: null,
-  isAuthenticated: false,
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuthToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-      state.isAuthenticated = true;
+    setCurrentUser: (state, action: PayloadAction<{ currentUser: TUser; token: string }>) => {
+      console.log(action.payload);
+      state.currentUser = action.payload.currentUser;
+      state.token = action.payload.token;
     },
     logout: (state) => {
+      state.currentUser = null;
       state.user = null;
       state.token = null;
-      state.isAuthenticated = false;
     },
   },
 });
 
-export const { setAuthToken, logout } = authSlice.actions;
+export const { setCurrentUser, logout } = authSlice.actions;
 export default authSlice.reducer;
 
 // API Queries for Authentication

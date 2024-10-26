@@ -10,7 +10,7 @@ import { RiUserFollowLine } from "react-icons/ri";
 
 const DashbordUserProfile: React.FC = () => {
   const user = useAppSelector(
-    (state) => state.user?.currentUser?.user
+    (state) => state.auth?.currentUser
   ) as TUser;
 
   const [isModalOpen, setModalOpen] = useState(false);

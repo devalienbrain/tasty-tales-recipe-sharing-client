@@ -1,5 +1,5 @@
 // src/components/shared/ReduxProvider.tsx
-"use client"; // Mark this as a client-side component
+"use client"; 
 
 import { Provider } from "react-redux";
 import { store } from "@/redux/store";

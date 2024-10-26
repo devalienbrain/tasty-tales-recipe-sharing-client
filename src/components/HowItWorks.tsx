@@ -157,13 +157,11 @@ const HowItWorks = () => {
             className="flex flex-col items-center text-center rounded-2xl p-10 bg-black/20 shadow-md transform hover:scale-105 transition-transform duration-300"
           >
             {step.icon}
-            <div className="w-9 h-9 rounded-full bg-white/5 flex justify-center items-center font-bold text-white mb-4">
-              {step.step}
-            </div>
-            <h3 className="text-2xl font-semibold mb-2 text-cyan-400">
+            {/*  */}
+            <h3 className="text-xl font-bold mb-2 text-cyan-400">
               {step.title}
             </h3>
-            <p className="text-md text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-300 leading-relaxed">
               {step.description}
             </p>
           </div>

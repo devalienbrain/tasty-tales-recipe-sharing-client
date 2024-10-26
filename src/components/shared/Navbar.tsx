@@ -294,20 +294,22 @@ const Navbar = () => {
       </div>
 
       {/* Large screen view */}
-      <div className="hidden lg:flex justify-between items-center">
-        <div className="flex items-center">
-          <Image
-            src={logo}
-            alt="TastyTaleLogo"
-            width={40}
-            height={40}
-            className="rounded-full object-cover"
-          />
-          <Link href="/" className="ml-2 text-2xl font-extrabold">
-            Tasty<span className="text-cyan-400">Tales</span>
-          </Link>
-        </div>
 
+      <div className="hidden lg:flex justify-between items-center">
+        <Link href="/" title="Home">
+          <div className="flex items-center">
+            <Image
+              src={logo}
+              alt="TastyTaleLogo"
+              width={40}
+              height={40}
+              className="rounded-full object-cover"
+            />
+            <div className="ml-2 text-2xl font-extrabold">
+              Tasty<span className="text-cyan-400">Tales</span>
+            </div>
+          </div>
+        </Link>
         <ul className="menu menu-horizontal space-x-1 flex justify-end items-center font-semibold">
           {/* Navbar menu content */}
           <li>
@@ -334,28 +336,27 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard" className="hover:text-cyan-400">
-                  Dashboard
-                </Link>
-              </li>
-              <li>
                 <button
                   className="btn btn-ghost text-red-500"
                   aria-label="Logout"
                   onClick={handleLogout}
+                  title="Logout"
                 >
                   <MdLogout className="text-2xl font-black" />
                 </button>
               </li>
               <li>
                 {currentUser?.photoUrl ? (
-                  <Image
-                    src={currentUser.photoUrl} // User profile picture
-                    alt={currentUser.name}
-                    width={40}
-                    height={40}
-                    className="p-1 object-cover rounded-full border border-cyan-300 flex items-center justify-center"
-                  />
+                  <Link href="/dashboard" className="hover:text-cyan-400">
+                    <Image
+                      src={currentUser.photoUrl} // User profile picture
+                      alt={currentUser.name}
+                      width={40}
+                      height={40}
+                      className="p-1 object-cover rounded-full border border-cyan-300 flex items-center justify-center"
+                      title="Dashboard"
+                    />
+                  </Link>
                 ) : (
                   <div className="text-gray-400">User</div>
                 )}

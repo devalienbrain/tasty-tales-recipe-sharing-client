@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import img1 from "../../assets/DrFatiha.png";
-import img2 from "../../assets/alienDev.jpg";
+import img1 from "@/assets/DrFatiha.png";
+import img2 from "@/assets/alienDev.jpg";
 import {
   HiLocationMarker,
   HiOutlineMail,

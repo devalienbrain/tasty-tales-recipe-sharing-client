@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-import img from "../../assets/loginImg.jpg";
+import img from "@/assets/loginImg.jpg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCurrentUser, useLoginUserMutation } from "@/redux/slices/authSlice";

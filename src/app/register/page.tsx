@@ -11,7 +11,7 @@ import {
   AiOutlineFileImage,
   AiOutlineHome,
 } from "react-icons/ai"; // React icons
-import img from "../../assets/joinImg.jpg";
+import img from "@/assets/joinImg.jpg";
 import { useState } from "react";
 
 export type UserData = {
@@ -48,21 +48,25 @@ const RegisterPage = () => {
     setPhotoUrl(data.photoUrl);
     setAddress(data.address);
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          photoUrl,
-          address,
-          email,
-          password,
-          role: "user", // Hardcoded as "user"
-        }),
-      });
+      // const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch(
+        "https://tasty-tales-recipe-sharing-server.vercel.app/api/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            phone,
+            photoUrl,
+            address,
+            email,
+            password,
+            role: "user", // Hardcoded as "user"
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Registration failed");

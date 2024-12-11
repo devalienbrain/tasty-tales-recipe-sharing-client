@@ -2,8 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
-  // baseQuery: fetchBaseQuery({ baseUrl: "https://tasty-tales-recipe-sharing-server.vercel.app/api" }),
+  // baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://tasty-tales-recipe-sharing-server.vercel.app/api",
+  }),
   tagTypes: ["Recipe", "User", "auth", "Payment"],
   endpoints: (builder) => ({
     // Mutation to create a payment order

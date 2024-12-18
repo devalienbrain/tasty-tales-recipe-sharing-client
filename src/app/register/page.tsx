@@ -13,6 +13,7 @@ import {
 } from "react-icons/ai"; // React icons
 import img from "@/assets/joinImg.jpg";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export type UserData = {
   userName: string;
@@ -32,7 +33,7 @@ const RegisterPage = () => {
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -68,6 +69,7 @@ const RegisterPage = () => {
       setSuccess("Registration successful!");
       setError(""); // Clear any previous errors
       console.log("Register response:", result);
+      router.push("/login");
     } catch (err: any) {
       console.error(err.message);
       setError(err.message);

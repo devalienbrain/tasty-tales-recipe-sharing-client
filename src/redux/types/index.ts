@@ -8,7 +8,7 @@ export interface Recipe {
   cookingTime: number;
   image: string;
   ratings: { userId: string; rating: number }[];
-  comments: string[];
+  comments: Comment[];
   author: string;
   isPublished?: boolean;
   createdBy?: string;
@@ -47,3 +47,9 @@ export interface Comment {
   content: string;
   date: string;
 }
+
+// Define TUsersResponse type to have the 'data' property
+export type TUsersResponseData = {
+  data: TUser[]; // data is an array of TUser
+  // other properties if present
+};

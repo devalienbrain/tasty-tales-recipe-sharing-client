@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { FaEdit, FaTrashAlt, FaUserShield } from "react-icons/fa";
-import { TUser, TUsersResponse } from "@/redux/types";
+import { TUser, TUsersResponseData } from "@/redux/types";
 import {
   useBlockUserMutation,
   useGetAllUsersQuery,
@@ -16,13 +16,13 @@ const AllUsers: React.FC = () => {
 
   console.log("Users data:", allUsers); // Debug the structure of users
 
-  // const allUsers: TUser[] = Array.isArray(users) ? users : [];
+  const users: TUser[] = Array.isArray(allUsers) ? allUsers : [];
 
-  const users: TUsersResponse[] = Array.isArray(allUsers?.data)
-    ? allUsers.data
-    : Array.isArray(allUsers)
-    ? allUsers
-    : [];
+  // const users: TUser[] = Array.isArray(allUsers?.data)
+  //   ? allUsers.data
+  //   : Array.isArray(allUsers)
+  //   ? allUsers
+  //   : [];
 
   const handleBlock = async (id: string) => {
     if (window.confirm("Are you sure you want to block this user?")) {

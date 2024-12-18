@@ -17,9 +17,8 @@ type FormValues = {
 interface LoginResponse {
   success: boolean;
   token: string;
-  data: any; 
+  data: any;
 }
-
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -35,16 +34,17 @@ const LoginPage = () => {
   } = useForm<FormValues>();
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
-    setEmail(data?.email);
-    setPassword(data?.password);
     try {
-      const response = await loginUser({ email, password }).unwrap() as LoginResponse;;
+      const response = (await loginUser({
+        email: data.email,
+        password: data.password,
+      }).unwrap()) as LoginResponse;
+
       if (response.success) {
-        const { token, data } = response; // Destructure the correct fields
-        console.log(data);
+        const { token, data: userData } = response; // Use the correct field names
+        console.log(userData);
         localStorage.setItem("accessToken", token);
-        dispatch(setCurrentUser({ currentUser: data, token }));
+        dispatch(setCurrentUser({ currentUser: userData, token }));
         router.push("/dashboard");
       }
     } catch (err) {

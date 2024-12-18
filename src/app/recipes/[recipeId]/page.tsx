@@ -21,19 +21,19 @@ const RecipeDetailsPage = () => {
   const [comment, setComment] = useState<string>("");
   const [comments, setComments] = useState<Comment[]>([]);
 
-  useEffect(() => {
-    if (recipe) {
-      // Convert string[] to Comment[] if necessary
-      setComments(
-        (recipe.comments || []).map((content) => ({
-          userId: "unknown_user", // You can assign a default userId or fetch it
-          username: "Anonymous", // Similarly, assign a default username or fetch it
-          content,
-          date: new Date().toISOString(),
-        }))
-      );
-    }
-  }, [recipe]);
+  // useEffect(() => {
+  //   if (recipe) {
+  //     setComments(
+  //       (recipe.comments || []).map((content) => ({
+  //         userId: "unknown_user", 
+  //         username: "Anonymous", 
+  //         content, // Ensure this is a string, not a Comment object
+  //         date: new Date().toISOString(),
+  //       }))
+  //     );
+  //   }
+  // }, [recipe]);
+  
 
   // Return early while loading or if there's an error
   if (isLoading) return <div>Loading...</div>;
@@ -53,6 +53,7 @@ const RecipeDetailsPage = () => {
       ...recipe,
       comments: [...comments, newComment],
     };
+    
 
     // Correct the object structure to match the mutation's expected format
     await updateRecipe({ id: recipeId, updatedRecipe: updatedRecipe });
@@ -69,13 +70,13 @@ const RecipeDetailsPage = () => {
         className="flex items-center space-x-2 cursor-pointer"
         onClick={() => router.push("/recipes")}
       >
-        <FaArrowLeft className="text-cyan-700 text-xl" />
-        <p className="text-cyan-700 font-semibold">Back to Recipes</p>
+        <FaArrowLeft className="text-cyan-700 " />
+        <p className="text-cyan-700 ">Back to Recipes</p>
       </div>
 
       {/* Recipe Title and Image */}
       <div className="text-center mt-4">
-        <h1 className="text-4xl font-extrabold text-cyan-700">
+        <h1 className="text-4xl font-extrabold py-5">
           {recipe?.title}
         </h1>
         <div className="relative w-full h-80">
@@ -87,15 +88,15 @@ const RecipeDetailsPage = () => {
             className="rounded-lg shadow-lg"
           />
         </div>
-        <p className="mt-4 text-lg text-gray-600">{recipe?.description}</p>
+        <p className="mt-4 text-lg text-gray-300">{recipe?.description}</p>
       </div>
 
       {/* Ingredients Section */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-800">Ingredients</h2>
+        <h2 className="text-2xl font-semibold ">Ingredients</h2>
         <ul className="list-disc list-inside mt-2">
           {recipe?.ingredients.map((ingredient, index) => (
-            <li key={index} className="text-gray-700">
+            <li key={index} className="text-gray-300">
               {ingredient}
             </li>
           ))}
@@ -104,27 +105,27 @@ const RecipeDetailsPage = () => {
 
       {/* Instructions Section */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-800">Instructions</h2>
-        <p className="text-gray-700 mt-2">{recipe?.instructions}</p>
+        <h2 className="text-2xl font-semibold ">Instructions</h2>
+        <p className="text-gray-300 mt-2">{recipe?.instructions}</p>
       </div>
 
       {/* Comments Section */}
       <div>
-        <h2 className="text-2xl font-semibold text-gray-800">Comments</h2>
+        <h2 className="text-2xl font-semibold ">Comments</h2>
         {comments.length > 0 ? (
           <div className="space-y-4 mt-4">
             {comments.map((c, index) => (
               <div key={index} className="p-4 border rounded-lg shadow-sm">
-                <p className="font-bold text-gray-800">{c.username}</p>
-                <p className="text-gray-600">{c.content}</p>
-                <p className="text-gray-400 text-sm">
+                <p className="font-bold text-gray-200">{c.username}</p>
+                <p className="text-gray-200">{c.content}</p>
+                <p className="text-gray-200 text-sm">
                   {new Date(c.date).toLocaleString()}
                 </p>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-gray-600 mt-4">Be the first to comment!</p>
+          <p className="text-gray-200 mt-4">Be the first to comment!</p>
         )}
       </div>
 
@@ -138,7 +139,7 @@ const RecipeDetailsPage = () => {
           rows={4}
         />
         <button
-          onClick={handleCommentSubmit}
+          // onClick={handleCommentSubmit}
           className="mt-4 bg-blue-500 text-white p-3 w-full rounded-lg shadow-md hover:bg-blue-600"
         >
           Submit Comment

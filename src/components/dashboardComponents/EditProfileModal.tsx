@@ -36,14 +36,17 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
 
     // Call the API to update the user
     // Replace with your actual API call
-    await fetch(`http://localhost:5000/api/users/${user._id}`, {
-      // await fetch(`http://tasty-tales-recipe-sharing-server.vercel.app/api/users/${user._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedUser),
-    });
+    // await fetch(`http://localhost:5000/api/users/${user._id}`, {
+    await fetch(
+      `http://tasty-tales-recipe-sharing-server.vercel.app/api/users/${user._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+      }
+    );
 
     dispatch(updateUser(updatedUser));
     onClose(); // Close the modal after submission

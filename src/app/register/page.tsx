@@ -42,24 +42,25 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: UserData) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        // const response = await fetch(
-        //   "https://tasty-tales-recipe-sharing-server.vercel.app/api/auth/signup",
-        //   {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: data.userName,
-          phone: data.phone,
-          photoUrl: data.photoUrl,
-          address: data.address,
-          email: data.email,
-          password: data.password,
-          role: "user", // Hardcoded as "user"
-        }),
-      });
+      // const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch(
+        "https://tasty-tales-recipe-sharing-server.vercel.app/api/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: data.userName,
+            phone: data.phone,
+            photoUrl: data.photoUrl,
+            address: data.address,
+            email: data.email,
+            password: data.password,
+            role: "user", // Hardcoded as "user"
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Registration failed");

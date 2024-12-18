@@ -40,45 +40,37 @@ const RegisterPage = () => {
   } = useForm<UserData>();
 
   const onSubmit = async (data: UserData) => {
-    console.log(data);
-    setName(data.userName);
-    setEmail(data.email);
-    setPassword(data.password);
-    setPhone(data.phone);
-    setPhotoUrl(data.photoUrl);
-    setAddress(data.address);
     try {
-      // const response = await fetch("http://localhost:5000/api/auth/signup", {
-      const response = await fetch(
-        "https://tasty-tales-recipe-sharing-server.vercel.app/api/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            phone,
-            photoUrl,
-            address,
-            email,
-            password,
-            role: "user", // Hardcoded as "user"
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        // const response = await fetch(
+        //   "https://tasty-tales-recipe-sharing-server.vercel.app/api/auth/signup",
+        //   {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.userName,
+          phone: data.phone,
+          photoUrl: data.photoUrl,
+          address: data.address,
+          email: data.email,
+          password: data.password,
+          role: "user", // Hardcoded as "user"
+        }),
+      });
 
       if (!response.ok) {
         throw new Error("Registration failed");
       }
 
-      const data = await response.json();
+      const result = await response.json();
       setSuccess("Registration successful!");
       setError(""); // Clear any previous errors
-      console.log("Register response:", data);
+      console.log("Register response:", result);
     } catch (err: any) {
       console.error(err.message);
-      throw new Error(err.message);
+      setError(err.message);
     }
   };
 
